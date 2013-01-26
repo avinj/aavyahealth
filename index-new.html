@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Aavya Health</title>
+    <link rel="stylesheet" href="css/foundation1.css">
+    <link rel="stylesheet" href="css/TangleKit.css">
+    <link rel="stylesheet" href="css/typography.css">
+</head>
+<body>
+    <div class="row">
+        <div class="twelve columns" id="info">
+            <div class="row meta">
+                <h1 class="twelve columns" style="width:100.5%">Aavya Health</h1>
+                <h3 class="twelve columns">Tell us about yourself</h3>
+                <div class="two columns gender">
+                    <h6>Your Gender</h6>
+                    <p class="tac">
+                        <span class="TKToggle TKSwitch" data-var="gender">
+                            <span>Male</span>
+                            <span>Female</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="two columns ethnicity">
+                    <h6>Your Race/Ethnicity</h6>
+                    <select>
+                        <option value="">&ndash; Select One &ndash;</option>
+                        <option value="asian">Asian</option>
+                        <option value="caucasian">White/Caucasian</option>
+                    </select>
+                </div>
+                <div class="four columns age">
+                    <h6>Your Age</h6>
+                    <div id="aslider" class="slider">
+                        <div class="knob"></div>
+                    </div>
+                    <span id="age" data-var="age">42</span><span class="gray">Years</span>
+                </div>
+                <div class="two columns height">
+                    <h6>Your Height</h6>
+                    <p class="six columns">
+                        <span data-var="ht-ft" class="TKNumberField htft"> <span class="dim6" style="position:relative;top:-8px">ft</span></span>
+                    </p>
+                    <p class="six columns">
+                        <span data-var="ht-in" class="TKNumberField htin"> <span class="dim6" style="position:relative;top:-8px">in</span></span>
+                    </p>
+                </div>
+                <div class="two column weight">
+                    <h6>Your Weight</h6>
+                    <p>
+                        <span data-var="wt" class="TKNumberField wt"> <span class="dim6" style="position:relative;top:-8px">lbs</span></span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row health-meta">
+                <h3 class="twelve columns">Tell us about your health and habits</h3>
+                <div class="two columns diabetic">
+                    <h6>Are you Diabetic?</h6>
+                    <p class="tac">
+                        <span class="TKToggle TKSwitch" data-var="diabetic">
+                            <span>No</span>
+                            <span>Yes</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="two columns smoker">
+                    <h6>Do you Smoke?</h6>
+                    <p class="tac">
+                        <span class="TKToggle TKSwitch" data-var="smoker">
+                            <span>No</span>
+                            <span>Yes</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="three columns medication">
+                    <h6>On Hypertension medication?</h6>
+                    <p class="tac">
+                        <span class="TKToggle TKSwitch" data-var="bptreated">
+                            <span>No</span>
+                            <span>Yes</span>
+                        </span>
+                    </p>
+                </div>
+                <div class="five columns maxbp">
+                    <h6>Your Systolic Max Blood Pressure</h6>
+                    <div id="bslider" class="slider">
+                        <div class="knob"></div>
+                    </div>
+                    <span id="bp" data-var="bp">120</span><span class="gray">mm/Hg</span>
+                </div>
+            </div>
+
+            <div class="row cholesterol-meta">
+                <h3 class="twelve columns">Tell us your Cholesterol numbers</h3>
+                <div class="four columns t-chol">
+                    <h6>Total Cholesterol</h6>
+                    <div class="slider" id="tslider">
+                        <div class="knob"></div>
+                        <div class="al">
+                            <p>Desirable</p>
+                        </div>
+                        <div class="tb">
+                            <p>Borderline</p>
+                        </div>
+                        <div class="ar">
+                            <p>High</p>
+                        </div>
+                    </div>
+                    <p class="tac">
+                        <span data-var="totalchol" id="tchol">81</span>
+                        <span class="dim6">mg/DL</span>
+                    </p>
+                </div>
+                <div class="four columns ldl">
+                    <h6>LDL Cholesterol</h6>
+                    <div class="slider" id="lslider">
+                        <div class="knob"></div>
+                        <div class="al">
+                            <p>Optimal</p>
+                        </div>
+                        <div class="lb">
+                            <p>Borderline</p>
+                        </div>
+                        <div class="ar">
+                            <p>High</p>
+                        </div>
+                    </div>
+                    <p class="tac">
+                        <span data-var="ldl" id="lchol">81</span>
+                        <span class="dim6">mg/DL</span>
+                    </p>
+                </div>
+                <div class="four columns hdl">
+                    <h6>HDL Cholesterol</h6>
+                    <div class="slider" id="hslider">
+                        <div class="knob"></div>
+                        <div class="ar">
+                            <p>Optimal</p>
+                        </div>
+                        <div class="hb">
+                            <p>Borderline</p>
+                        </div>
+                        <div class="al">
+                            <p>Low</p>
+                        </div>
+                    </div>
+                    <p class="tac">
+                        <span data-var="hdl" id="hchol">81</span>
+                        <span class="dim6">mg/DL</span>
+                    </p>
+                </div>
+            </div>
+            <div class="row results" id="theresults">
+                <h3 class="twelve columns">Your Health Results</h3>
+                <div class="twelve columns">
+                    <div class="row">
+                        <div class="seven columns centered">
+                            <p class="subheading tac">You have a <span data-var="risk"></span>% risk of having a heart attack or stroke in the next 10 years.</p>
+                            <div class="round MWScaledown" data-var="radius">
+                                <div id="risk" class="MWScaleup" data-var="fsize">
+                                  <span data-var="risk">%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.row -->
+                    <div class="row mtl recos">
+                        <div class="three columns lowrisk">
+                            <div id="bpr" class="habits">
+                                <h6>Your risk would be:</h6>
+                                <div class="round MWScaledown" data-var="bpradius">
+                                    <div id="bprisk" class="MWScaleup" data-var="bpfsize">
+                                        <span data-var="bprisk">%</span>
+                                    </div>
+                                </div>
+                                <p class="tac mtl">If you lower your blood pressure.</p>
+                                <p class="tac">Alcohol increases blood pressure. Limit alcohol intake to one or two drinks per day</p>
+                            </div>
+                        </div>
+                        <div class="three columns lowrisk">
+                            <div id="chr" class="habits">
+                                <h6>Your risk would be:</h6>
+                                <div class="round MWScaledown" data-var="chradius">
+                                    <div id="chrisk" class="MWScaleup" data-var="chfsize">
+                                        <span data-var="chrisk">%</span>
+                                    </div>
+                                </div>
+                                <p class="tac mtl">If you lower your cholesterol.</p>
+                                <p class="tac">High cholesterol can cause plaques to develop in your blood vessels, increasing the risk of a heart attack or stroke. You can control your cholesterol with diet and medications.</p>
+                            </div>
+                        </div>
+                        <div class="three columns lowrisk">
+                            <div id="t3r" class="habits">
+                                <h6>Your risk would be:</h6>
+                                <div class="round MWScaledown" data-var="t3radius">
+                                    <div id="t3risk" class="MWScaleup" data-var="t3fsize">
+                                        <span data-var="t3risk">%</span>
+                                    </div>
+                                </div>
+                                <p class="tac mtl">Exercising 4 times a week can help you lose weight, which will help reduce your blood pressure.</p>
+                            </div>
+                        </div>
+                        <div class="three columns lowrisk">
+                            <div id="nsr" class="habits">
+                                <h6>Your risk would be:</h6>
+                                    <div class="round MWScaledown" data-var="nsradius">
+                                    <div id="nsrisk" class="MWScaleup" data-var="nsfsize">
+                                        <span data-var="nsrisk">%</span>
+                                    </div>
+                                </div>
+                                <p class="tac mtl">If you quit smoking.</p>
+                                <p class="tac">Cigarette smoke contains chemicals that directly damage your blood vessels. This damage places you at a greater risk of heart attack or stroke.</p>
+                            </div>
+                        </div>
+                    </div><!-- /.row -->
+                </div>
+            </div><!-- /.results -->
+            <div class="row stack-up" id="stackup">
+                <h3 class="twelve columns">Here&rsquo;s how you stack up against people your age</h3>
+                <div class="twelve columns">
+                    <div class="four columns tc">
+                        <h6>Total Cholesterol</h6>
+                    </div>
+                    <div class="four columns lc">
+                        <h6>LDL Cholesterol</h6>
+                    </div>
+                    <div class="four columns hc">
+                        <h6>HDL Cholesterol</h6>
+                    </div>
+                </div>
+            </div><!-- /.stack-up -->
+        </div>
+    </div>
+    <div class ="row">
+        <div class="twelve columns">
+            <div class="row">
+                <h2 class="twelve columns" style="width:100.5%">Your Health Role Model
+                    <span class="mini-text">Here's a real person like you who is healthy. Check out what they are doing&mdash;you could learn ways of becoming healthy!</span>
+                </h2>
+                <div class="twelve columns role-model">
+                    <div class="row role-model-info">
+                        <div class="three columns">
+                            <p class="small-text">This is a healthy <span class="gender-result bold">female</span> around <span class="weight bold">115 lbs</span> and <span class="height-ft bold">5'</span> <span class="height-in bold">8"</span>.</p>
+                            <p class="small-text"><span class="gender-ref">She</span> has a <span class="risk low">4%</span> risk of a heart attack in 10 years.</p>
+                        </div>
+                        <div class="nine columns">
+                            <div class="role-model-sa six columns">
+                                <h6>Supplements &amp; activities of your health role model</h6>
+                                <ul>
+                                    <li>Vitamin C <span class="chiclet">500 mg</span> daily</li>
+                                    <li>Fish Oil <span class="chiclet">20 mg</span> daily</li>
+                                    <li>Walking <span class="chiclet">2 miles</span> daily</li>
+                                    <li>Apple <span class="chiclet">3 times</span> daily</li>
+                                </ul>
+                            </div>
+                            <div class="peer-sa six columns">
+                                <h6>Popular supplements &amp; activities among your peers</h6>
+                                <ul>
+                                    <li><span class="ratio">40%</span> Vitamin C</li>
+                                    <li><span class="ratio">40%</span> Fish Oil</li>
+                                    <li><span class="ratio">10%</span> Walking</li>
+                                    <li><span class="ratio">10%</span> Healthy Food Choices</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="twelve columns">
+            <div class="row">
+                <h2 class="twelve columns" style="width:100.5%">Your Personalized Recommendations</h2>
+                <div class="twelve columns personal-reco">
+                    <div class="row">
+                        <div class="six columns">
+                            <h6>logo for recommended drugs</h6>
+                            <p>Crestor is in a class of medications called statins, which can lower your cholesterol. Ask your doctor to learn more about how this medication can help you.</p>
+                        </div>
+                        <div class="three columns tac">
+                            <p>Modified risk while taking this medication:</p>
+                            <p><span data-var="mod-risk" class="low risk">3%</span></p>
+                        </div>
+                        <div class="three columns tac">
+                            <p>Your total cholesterol can be reduced by: 30%</p>
+                            <div class="rs"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.row -->
+        </div>
+    </div>
+    <!-- Included JS Files -->
+    <script src="js/Tangle.js"></script>
+    <script src="js/mootools.js"></script>
+    <script src="js/Class.Binds.js"></script>
+    <script src="js/Drag/Drag.js"></script>
+    <script src="js/Drag/Drag.Move.js"></script>
+    <script src="js/Drag/Slider.js"></script>
+    <script src="js/Drag/Sortables.js"></script>
+    <script src="js/Element.Measure.js"></script>
+    <script src="js/Mdrag.js"></script>
+    <script src="js/Mslider.js"></script>
+    <script src="js/sprintf.js"></script>
+    <script src="js/BVTouchable.js"></script>
+    <script src="js/TangleKit.js"></script>
+    <script src="js/d3.v2.min.js"></script>
+    <script src="js/aavya.js"></script>
+</body>
+</html>
