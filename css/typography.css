@@ -143,7 +143,13 @@ body > .row {
 .tac {text-align: center}
 
 /*brand recommendation*/
-.brand-info{margin-top:4px}
+.brand-info{margin-top:15px}
+.brand-logo{margin-top:10px;}
+.box-shadow {
+-webkit-box-shadow: 0 10px 6px -6px #777;
+-moz-box-shadow: 0 10px 6px -6px #777;
+box-shadow: 0 10px 6px -6px #777;
+    }
 
 /*risk modification*/
 .risk-down {
