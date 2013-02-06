@@ -138,16 +138,38 @@ body > .row {
 /* Role Model */
 .mini-text {font-size:12px; line-height:24px; display: block; font-weight: normal}
 .small-text{font-size:14px}
-.role-model li {padding: .5em 1em .5em 0; margin: 0; border-bottom: 1px solid #e9e9e9}
-.role-model li:last-child {border-bottom: none}
-.role-model li:hover {background-color: #f8f8f8}
 .bold {font-weight: bold}
-.risk {border-radius: 50%; padding: .45em .4em; text-shadow: none}
-.risk.low {color: #fff; background-color: green}
-.risk.med {color: #333; background-color: yellow}
-.risk.high {color: #fff; background-color: red}
-.chiclet {font-size:.65em;border-radius:3px; background-color:#eee; padding:.25em .5em; text-shadow:0 1px 0 rgba(255, 255, 255, 0.5); border:1px solid #ccc; margin:0 4px}
+.chiclet {font-size:.85em;border-radius:10px; background-color:#eee; padding:.25em .5em; text-shadow:0 1px 0 rgba(255, 255, 255, 0.5); border:1px solid #ccc; margin-right:4px}
 .tac {text-align: center}
+
+/*brand recommendation*/
+.brand-info{margin-top:4px}
+
+/*risk modification*/
+.risk-down {
+    position:relative;
+    width:0px;
+    height:0px;
+    border: 25px solid green;
+    border-top-width:0;
+    left:75px;
+}
+.risk-arrow-down {
+position:relative;
+  width:0px; 
+  height:0px; 
+  border-left:40px solid transparent;
+  border-right:40px solid transparent;
+  border-top:50px solid green;
+  font-size:0px;
+  line-height:0px;
+  left:60px;
+}
+.risk-arrow-text {color:white; width:50px; background-color:green; left:75px; position:relative; font-weight:bold; font-size:1.6em; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);}    
+.risk-circle {border-radius: 100%; padding: .75em .35em; text-shadow: none}
+.risk-circle.low {color: #fff; background-color: green}
+.risk-circle.med {color: #333; background-color: yellow}
+.risk-circle.high {color: #fff; background-color: red}
 
 /*You*/
 input[type="text"] {font-family:"Helvetica Neue","HelveticaNeue",Helvetica,Arial,"Lucida Grande",sans-serif;font-size:21px}
@@ -313,7 +335,7 @@ span[data-var$="risk"] {
 }
 
 .bar-rs:before {
-    content: "WITHOUT THIS MEDICATION";
+    content: "WITHOUT THIS PRODUCT";
     font-size: 10px;
     position: absolute;
     left: 0;
@@ -324,7 +346,7 @@ span[data-var$="risk"] {
 }
 
 .bar-rs:first-child:before {
-    content: "WITH THIS MEDICATION";
+    content: "WITH THIS PRODUCT";
     top: -28px;
 }
 
