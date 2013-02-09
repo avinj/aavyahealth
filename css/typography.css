@@ -212,19 +212,10 @@ padding: 20px 0 20px 0;
 }
 
 /*diet chart*/
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.bar {
-  fill: steelblue;
-}
-
-.x.axis path {
-  display: none;
+#micronutrient-profile{
+padding: 5px;
+border-radius: 10px;
+background-color: white;
 }
 
 /*You*/
