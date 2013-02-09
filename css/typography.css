@@ -221,6 +221,12 @@ padding: 5px;
 width: 70%;
 margin-left: 20px
 }
+#printbutton{
+height: 120px;
+font-size: 31px;
+padding-top: 20px;
+line-height: 1.2;
+}
 
 /*diet chart*/
 #micronutrient-profile{
