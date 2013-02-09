@@ -173,9 +173,59 @@ position:relative;
 }
 .risk-arrow-text {color:white; width:50px; background-color:green; left:75px; position:relative; font-weight:bold; font-size:1.6em; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);}    
 .risk-circle {border-radius: 100%; padding: .75em .35em; text-shadow: none}
-.risk-circle.low {color: #fff; background-color: green}
-.risk-circle.med {color: #333; background-color: yellow}
-.risk-circle.high {color: #fff; background-color: red}
+.risk-circle-single {border-radius: 100%; padding: .75em .65em; text-shadow: none}
+.low {color: #fff; background-color: green}
+.med {color: #333; background-color: yellow}
+.high {color: #fff; background-color: red}
+
+/*Diet*/
+.diet-benefit{font-size:13px; margin-left:18px; color:#888}
+.food-product{width:154px;}
+.product-left{width:88%;}
+.product-box{
+float:left;
+background-color: rgba(0, 0, 0, 0.03);
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+margin: 10px 0 10px 20px;
+padding: 10px 10px 10px 22px;
+width: 22%
+}
+.diet-side{
+width: 26%;
+-webkit-border-radius: 10px 0px 5px 10px;
+background-color: rgba(219, 255, 249, 0.57);
+height: 793px;
+z-index: 2;
+position: absolute;
+margin-left: 74%;
+box-shadow: 6px 0px 10px -7px #888, -6px 0px 10px -7px #888;}
+.diet-sidebar-section:first-child{
+border:none;
+padding:20px 0 20px 0;
+}
+.diet-sidebar-section {
+border-top: 2px solid #ccc;
+border-radius: 1px;
+padding: 20px 0 20px 0;
+}
+
+/*diet chart*/
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
 
 /*You*/
 input[type="text"] {font-family:"Helvetica Neue","HelveticaNeue",Helvetica,Arial,"Lucida Grande",sans-serif;font-size:21px}
