@@ -235,6 +235,9 @@ text-align:center
     font-weight:bold;
     fill:#555;
 }
+.daily-allow {
+    padding: 10px 10px 0 0;
+}
 .serving-label{
     font-size:50px;
     font-family:"Arial Black";
@@ -264,7 +267,7 @@ input[type="text"] {font-family:"Helvetica Neue","HelveticaNeue",Helvetica,Arial
 .TKNumberField {position:relative}
 .TKNumberField input {width:65%; display:inline-block; position:relative; top: -11px; float:left; margin:0 4px 8px 2px; height: 1%}
 .meta p {margin:0;padding:0}
-.meta select {position:relative;top:-6px}
+.meta select {position:relative}
 
 .round {
     height: 5em;
@@ -304,6 +307,13 @@ span[data-var$="risk"] {
     white-space: nowrap;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
+
+.TKDropDown {
+    top: 0;
+    height: 43px;
+    font-size: 14px
+}
+
 .TKToggle {
     background-color: #eee;
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eee), color-stop(100%, #ccc));
@@ -323,6 +333,7 @@ span[data-var$="risk"] {
     width: 98%;
     margin: -8px auto 0;
 }
+
 
 .TKToggle:hover {
     background-color: #D7E5F5;

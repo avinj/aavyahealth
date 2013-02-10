@@ -781,7 +781,7 @@ var stackupDataTC = [210, 200]; // total cholesterol
 var stackupDataLC = [110, 120]; // ldl cholesterol
 var stackupDataHC = [140, 60]; // hdl cholesterol
 var reducedStats = [180, 250];
-var reducedBy = 0.3; // Variable percentage reduction upon using medication
+var reducedBy = 0.8; // Variable percentage reduction upon using medication
 
 var drawChart = function(data, classname) {
     d3.select("." + classname + " div").remove();
