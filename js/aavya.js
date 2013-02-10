@@ -1006,7 +1006,7 @@ var sodServingCenter = sodSvg.append("svg:text")
       .text(sodLevel[0]);
 
 ////// "LAZY" LOAD GRAPHS ////
-var minView = document.body.scrollHeight*.46;
+var minView = document.body.scrollHeight*.40;
 var ss = new ScrollSpy({ 
     min: minView, 
         onEnter: function() { 
