@@ -36,7 +36,9 @@ h3.columns {
     padding: 16px 15px;
 }
 
-h6 {
+.center {text-align:center;}
+
+h6{
     font-size: 10px;
     line-height: 16px;
     font-weight: bold;
@@ -179,7 +181,7 @@ position:relative;
 .high {color: #fff; background-color: red}
 
 /*Diet*/
-.diet-benefit{font-size:13px; margin-left:18px; color:#888}
+.diet-benefit{font-size:13px; margin-left:20px; color:#888;margin-bottom:0}
 .food-product{width:154px;}
 .product-left{width:88%;}
 .product-box{
@@ -198,7 +200,6 @@ width: 26%;
 -webkit-border-radius: 10px 0px 5px 10px;
 background-color: rgba(219, 255, 249, 0.57);
 height: 860px;
-z-index: 2;
 position: absolute;
 margin-left: 74%;
 box-shadow: 6px 0px 10px -7px #888, -6px 0px 10px -7px #888;}
@@ -209,7 +210,7 @@ padding:20px 0 20px 0;
 .diet-sidebar-section {
 border-top: 2px solid #ccc;
 border-radius: 1px;
-padding: 20px 0 20px 0;
+padding: 15px 0 20px 0
 }
 #autoproduct
 {
@@ -221,19 +222,42 @@ padding: 5px;
 width: 70%;
 margin-left: 20px
 }
-#printbutton{
-height: 120px;
-font-size: 31px;
-padding-top: 20px;
-line-height: 1.2;
-}
 
 /*diet chart*/
-#micronutrient-profile{
-padding: 5px;
-border-radius: 10px;
-background-color: white;
+#diet-charts{
+padding: 5px;text-align:center
 }
+#sodium-chart{
+text-align:center
+}
+.diet-label{
+    font-size:12px;
+    font-weight:bold;
+    fill:#555;
+}
+.serving-label{
+    font-size:50px;
+    font-family:"Arial Black";
+    fill:#555;
+    text-shadow:0 2px white;
+}
+.serving-label-sodium{
+    font-size:20px;
+    font-family:"Arial Black";
+    fill:#555;
+    text-shadow:0 2px white;
+}
+.serving-recc-label{
+    font-size:10px;
+    font-weight:bold;
+    fill:#555;
+}
+.serving-color-val{
+    fill:none;
+}
+path{opacity:0;}
+svg{margin-top:10px;}
+#sodium{margin-top:0;}
 
 /*You*/
 input[type="text"] {font-family:"Helvetica Neue","HelveticaNeue",Helvetica,Arial,"Lucida Grande",sans-serif;font-size:21px}

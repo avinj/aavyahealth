@@ -854,3 +854,156 @@ var drawChart = function(data, classname) {
                     .style("color", function(d) {if (d <= 100) {return "#000"}});
     }
 };
+
+/*Daily Serving Size charts
+------------
+ Grains: 6-8
+ Vegetables: 4-5
+ Fruits: 4-5
+ Fat-free or low-fat milk and milk products: 2-3
+ Lean meats, poultry and fish: 6 or less
+ Nuts, seeds or legumes: 4-5 per week
+ Fats and oils: 2-3
+ Sweets and added sugars: 5 or less/week
+*/
+
+
+var servingData = [{"group":"GRAINS","servings":[3,5],"text":"GOAL: 6-8"},
+                {"group":"VEGETABLES","servings":[5,0],"text":"GOAL: 4-5"},
+                {"group":"FRUITS","servings":[4,1],"text":"GOAL: 4-5"},
+                {"group":"DAIRY","servings":[1,2],"text":"GOAL: 2-3"},
+                {"group":"MEAT","servings":[3,3],"text":"GOAL: <6"},
+                {"group":"NUTS/LEGUMES","servings":[4,1],"text":"GOAL: 4-5/WEEK"},
+                {"group":"FATS/OILS","servings":[2,1],"text":"GOAL: 2-3/WEEK"},
+                {"group":"SWEETS","servings":[2,3],"text":"GOAL: <5/WEEK"},
+               ];
+
+var width = 100,
+    height = 120,
+    radius = Math.min(width, height) / 2;
+
+var arc = d3.svg.arc()
+    .innerRadius(radius - 5)
+    .outerRadius(radius - 20);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d; });
+
+var svg = d3.select("#diet-charts").selectAll(".pie")
+      .data(servingData)
+    .enter().append("svg")
+      .attr("class", "pie")
+      .attr("width", width)
+      .attr("height", height)
+    .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+//INNER CIRCLE
+var centerPulse = svg.append("svg:circle")
+      .attr("r",radius-6)
+      .attr("class","serving-color-val");
+
+//FOOD GROUP LABEL
+var foodGroupLabel = svg.append("svg:text")
+      .attr("class", "diet-label")
+      .attr("dy", -50)
+      .attr("text-anchor", "middle") 
+      .text(function(d) {return d.group;});
+
+//RECOMMENDED SERVING
+var reccServing = svg.append("svg:text")
+     .attr("class", "serving-recc-label")
+     .attr("dy", 55)
+     .attr("text-anchor", "middle") 
+     .text(function(d) {return d.text});
+
+//GRAPH ARCS
+var path = svg.selectAll(".arc")
+      .data(function(d) { 
+        return pie(d.servings); 
+    })
+    .enter().append("path")
+      .attr("class","arc")
+      .transition()
+        .duration(1000)
+        .style("opacity", 1)
+      .attr("fill", function(d, i) { 
+        mygroup = $(this).getParent().getFirst('text').get('text');
+        if (mygroup == "MEAT" || mygroup == "NUTS/LEGUMES") {
+            return i == 0 ? "yellow" : "lightyellow";
+        } else if (mygroup == "FATS/OILS" || mygroup == "SWEETS") {
+            return i == 0 ? "red" : "pink";
+        } else {
+            return i == 0 ? "green" : "lightgreen";
+        }
+
+        })
+      .attr("d", arc);
+
+//CURRENT SERVING NUMBER
+var servingCenter = svg.append("svg:text")
+      .attr("class", "serving-label")
+      .attr("dy", 19)
+      .attr("text-anchor", "middle")
+      .text(function(d,i) {return d.servings[0]});
+
+/////////
+/// SODIUM
+/////////
+var sodWidth = 105,
+    sodHeight = 126,
+    sodLevel = [1000,1300],
+    sodRadius = Math.min(sodWidth, sodHeight) / 2;
+
+var sodArc = d3.svg.arc()
+    .innerRadius(sodRadius - 5)
+    .outerRadius(sodRadius - 20);
+
+var pie = d3.layout.pie()
+    .sort(null);
+
+var sodSvg = d3.select("#sodium-chart")
+     .append("svg")
+      .attr("id", "sodium")
+      .attr("class", "sodPie")
+      .attr("width", sodWidth)
+      .attr("height", sodHeight)
+    .append("g")
+      .attr("transform", "translate(" + sodWidth / 2 + "," + sodHeight / 2 + ")");
+
+//INNER CIRCLE
+var sodCenterPulse = sodSvg.append("svg:circle")
+      .attr("r",radius-6)
+      .attr("class","serving-color-val");
+
+//RECOMMENDED SERVING
+var sodReccServing = sodSvg.append("svg:text")
+     .attr("class", "serving-recc-label")
+     .attr("dy", 60)
+     .attr("text-anchor", "middle") 
+     .text("GOAL: <2400 mg");
+
+//GRAPH ARCS
+var sodPath = sodSvg.selectAll(".arc")
+      .data(pie(sodLevel))
+    .enter().append("path")
+      .attr("class","arc")
+      .transition()
+        .duration(1000)
+        .style("opacity", 1)
+      .attr("fill", function(d, i) { 
+            return i == 0 ? "red" : "pink";
+        })
+      .attr("d", sodArc);
+
+//CURRENT SERVING NUMBER
+var sodServingCenter = sodSvg.append("svg:text")
+      .attr("class", "serving-label-sodium")
+      .attr("dy", 10)
+      .attr("text-anchor", "middle")
+      .text(sodLevel[0]);
+
+
+
+
