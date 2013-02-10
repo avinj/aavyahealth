@@ -311,7 +311,8 @@ span[data-var$="risk"] {
 .TKDropDown {
     top: 0;
     height: 43px;
-    font-size: 14px
+    font-size: 14px;
+    font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 .TKToggle {
