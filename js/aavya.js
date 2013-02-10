@@ -868,14 +868,14 @@ var drawChart = function(data, classname) {
 */
 
 
-var servingData = [{"group":"GRAINS","servings":[3,5],"text":"GOAL: 6-8"},
-                {"group":"VEGETABLES","servings":[5,0],"text":"GOAL: 4-5"},
+var servingData = [{"group":"GRAINS","servings":[4,4],"text":"GOAL: 6-8"},
+                {"group":"VEGETABLES","servings":[4,1],"text":"GOAL: 4-5"},
                 {"group":"FRUITS","servings":[4,1],"text":"GOAL: 4-5"},
                 {"group":"DAIRY","servings":[1,2],"text":"GOAL: 2-3"},
-                {"group":"MEAT","servings":[3,3],"text":"GOAL: <6"},
-                {"group":"NUTS/LEGUMES","servings":[4,1],"text":"GOAL: 4-5/WEEK"},
-                {"group":"FATS/OILS","servings":[2,1],"text":"GOAL: 2-3/WEEK"},
-                {"group":"SWEETS","servings":[2,3],"text":"GOAL: <5/WEEK"},
+                {"group":"MEAT","servings":[1,5],"text":"GOAL: <6"},
+                {"group":"NUTS/LEGUMES","servings":[1,4],"text":"GOAL: 4-5/WEEK"},
+                {"group":"FATS/OILS","servings":[0,3],"text":"GOAL: 2-3/WEEK"},
+                {"group":"SWEETS","servings":[1,4],"text":"GOAL: <5/WEEK"},
                ];
 
 var width = 100,
@@ -925,9 +925,6 @@ var path = svg.selectAll(".arc")
     })
     .enter().append("path")
       .attr("class","arc")
-      .transition()
-        .duration(1000)
-        .style("opacity", 1)
       .attr("fill", function(d, i) { 
         mygroup = $(this).getParent().getFirst('text').get('text');
         if (mygroup == "MEAT" || mygroup == "NUTS/LEGUMES") {
@@ -953,7 +950,7 @@ var servingCenter = svg.append("svg:text")
 /////////
 var sodWidth = 105,
     sodHeight = 126,
-    sodLevel = [1000,1300],
+    sodLevel = [415,1885],
     sodRadius = Math.min(sodWidth, sodHeight) / 2;
 
 var sodArc = d3.svg.arc()
@@ -977,21 +974,25 @@ var sodCenterPulse = sodSvg.append("svg:circle")
       .attr("r",radius-6)
       .attr("class","serving-color-val");
 
+//FOOD GROUP LABEL
+var sodGroupLabel = sodSvg.append("svg:text")
+      .attr("class", "diet-label")
+      .attr("dy", -50)
+      .attr("text-anchor", "middle") 
+      .text("SODIUM (MG)");
+
 //RECOMMENDED SERVING
 var sodReccServing = sodSvg.append("svg:text")
      .attr("class", "serving-recc-label")
      .attr("dy", 60)
      .attr("text-anchor", "middle") 
-     .text("GOAL: <2400 mg");
+     .text("GOAL: <2300 mg");
 
 //GRAPH ARCS
 var sodPath = sodSvg.selectAll(".arc")
       .data(pie(sodLevel))
     .enter().append("path")
       .attr("class","arc")
-      .transition()
-        .duration(1000)
-        .style("opacity", 1)
       .attr("fill", function(d, i) { 
             return i == 0 ? "red" : "pink";
         })
@@ -1004,6 +1005,17 @@ var sodServingCenter = sodSvg.append("svg:text")
       .attr("text-anchor", "middle")
       .text(sodLevel[0]);
 
-
-
+////// "LAZY" LOAD GRAPHS ////
+var minView = document.body.scrollHeight*.46;
+var ss = new ScrollSpy({ 
+    min: minView, 
+        onEnter: function() { 
+            $('diet-charts').morph({opacity: 1});
+            $('sodium-chart').morph({opacity: 1});
+        }, 
+        //onLeave: function() { 
+        //    $('diet-charts').morph({opacity: 0});
+        //    $('sodium-chart').morph({opacity: 0});
+        //} 
+});
 

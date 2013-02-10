@@ -154,6 +154,7 @@ box-shadow: 0 10px 6px -6px #777;
     }
 
 /*risk modification*/
+div.habits h6 {font-weight:bold; font-size:14px;}
 .risk-down {
     position:relative;
     width:0px;
@@ -184,6 +185,7 @@ position:relative;
 .diet-benefit{font-size:13px; margin-left:20px; color:#888;margin-bottom:0}
 .food-product{width:154px;}
 .product-left{width:88%;}
+.prod-placeholder{height:218px;}
 .product-box{
 float:left;
 background-color: rgba(0, 0, 0, 0.03);
@@ -199,7 +201,7 @@ width: 22%
 width: 26%;
 -webkit-border-radius: 10px 0px 5px 10px;
 background-color: rgba(219, 255, 249, 0.57);
-height: 860px;
+height: 993px;
 position: absolute;
 margin-left: 74%;
 box-shadow: 6px 0px 10px -7px #888, -6px 0px 10px -7px #888;}
@@ -222,12 +224,21 @@ padding: 5px;
 width: 70%;
 margin-left: 20px
 }
+#rewardbutton {
+    margin-top: 15px;
+}
+.button-img{
+    vertical-align:bottom;
+}
+
 
 /*diet chart*/
 #diet-charts{
+opacity:0;
 padding: 5px;text-align:center
 }
 #sodium-chart{
+opacity:0;
 text-align:center
 }
 .diet-label{
@@ -258,7 +269,6 @@ text-align:center
 .serving-color-val{
     fill:none;
 }
-path{opacity:0;}
 svg{margin-top:10px;}
 #sodium{margin-top:0;}
 
@@ -378,7 +388,7 @@ span[data-var$="risk"] {
     border-radius:3px;
     border:1px solid #dfdfdf;
 }
-.mtl {margin-top:36px;}
+.mtl {margin-top:36px; font-weight:bold;}
 .small, .small * {font-size:12px;}
 .recos .columns {opacity:.85;transition:all .2s ease-in-out;}
 .recos .columns:hover {opacity:1;}
