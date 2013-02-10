@@ -931,7 +931,7 @@ var path = svg.selectAll(".arc")
       .attr("fill", function(d, i) { 
         mygroup = $(this).getParent().getFirst('text').get('text');
         if (mygroup == "MEAT" || mygroup == "NUTS/LEGUMES") {
-            return i == 0 ? "yellow" : "lightyellow";
+            return i == 0 ? "gold" : "lightgoldenrodyellow";
         } else if (mygroup == "FATS/OILS" || mygroup == "SWEETS") {
             return i == 0 ? "red" : "pink";
         } else {
