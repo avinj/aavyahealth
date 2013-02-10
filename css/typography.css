@@ -185,18 +185,37 @@ position:relative;
 .diet-benefit{font-size:13px; margin-left:20px; color:#888;margin-bottom:0}
 .food-product{width:154px;}
 .product-left{width:88%;}
-.prod-placeholder{height:218px;}
+.prod-placeholder{
+    height:218px;
+    border: dashed rgba(0,0,0,0.05);
+}
 .product-box{
 float:left;
 background-color: rgba(0, 0, 0, 0.03);
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
-border: dashed rgba(0,0,0,0.05);
 margin: 10px 0 10px 20px;
 padding: 10px 10px 10px 22px;
 width: 22%
 }
+.green-product{
+border: dashed rgba(0,100,0,0.3);
+}
+.yellow-product{
+border: dashed rgba(200,200,0,0.3);
+}
+.red-product{
+border: dashed rgba(200,0,0,0.3);
+}
+
+.greenred-product{
+    border-right: dashed rgba(0,100,0,0.3);
+    border-left: dashed rgba(0,100,0,0.3);
+    border-top: dashed rgba(200,0,0,0.3);
+    border-bottom: dashed rgba(200,0,0,0.3);
+}
+
 .diet-side{
 width: 26%;
 -webkit-border-radius: 10px 0px 5px 10px;
