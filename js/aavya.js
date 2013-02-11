@@ -855,18 +855,6 @@ var drawChart = function(data, classname) {
     }
 };
 
-/*Daily Serving Size charts
-------------
- Grains: 6-8
- Vegetables: 4-5
- Fruits: 4-5
- Fat-free or low-fat milk and milk products: 2-3
- Lean meats, poultry and fish: 6 or less
- Nuts, seeds or legumes: 4-5 per week
- Fats and oils: 2-3
- Sweets and added sugars: 5 or less/week
-*/
-
 //force default to full cart (manual)
 var servingData = [{"id":"grains","group":"GRAINS","servings":[4,4],"maxservings":8,"text":"GOAL: 6-8"},
                 {"id":"vegetables","group":"VEGETABLES","servings":[4,1],"maxservings":5,"text":"GOAL: 4-5"},
