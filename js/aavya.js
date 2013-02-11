@@ -935,9 +935,15 @@ var svg = d3.select("#diet-charts").selectAll(".pie")
       .attr("class", "pie")
       .attr("id",function(d) {return d.group.toLowerCase().replace("/","")})
       .attr("width", width)
-      .attr("height", height)
+      .attr("height", function(d) {
+        return d.id == "sodium" ? height*1.22 : height;
+      })
     .append("g")
-      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+      .attr("transform", function(d) {
+        return d.id == "sodium" ? "translate(" + width / 2 + "," + 1.25*(height / 2) + ")" : "translate(" + width / 2 + "," + height / 2 + ")";
+      });
+
+      
 
 //FOOD GROUP LABEL
 var foodGroupLabel = svg.append("svg:text")
