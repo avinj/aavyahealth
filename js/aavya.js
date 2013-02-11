@@ -955,7 +955,7 @@ var foodGroupLabel = svg.append("svg:text")
 //RECOMMENDED SERVING
 var reccServing = svg.append("svg:text")
      .attr("class", "serving-recc-label")
-     .attr("dy", 55)
+     .attr("dy", 58)
      .attr("text-anchor", "middle") 
      .text(function(d) {return d.text});
 
