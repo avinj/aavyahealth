@@ -867,17 +867,69 @@ var drawChart = function(data, classname) {
  Sweets and added sugars: 5 or less/week
 */
 
-
-var servingData = [{"group":"GRAINS","servings":[4,4],"text":"GOAL: 6-8"},
-                {"group":"VEGETABLES","servings":[4,1],"text":"GOAL: 4-5"},
-                {"group":"FRUITS","servings":[4,1],"text":"GOAL: 4-5"},
-                {"group":"DAIRY","servings":[1,2],"text":"GOAL: 2-3"},
-                {"group":"MEAT","servings":[1,5],"text":"GOAL: <6"},
-                {"group":"NUTS/LEGUMES","servings":[1,4],"text":"GOAL: 4-5/WEEK"},
-                {"group":"FATS/OILS","servings":[0,3],"text":"GOAL: 2-3/WEEK"},
-                {"group":"SWEETS","servings":[1,4],"text":"GOAL: <5/WEEK"},
+//force default to full cart (manual)
+var servingData = [{"id":"grains","group":"GRAINS","servings":[4,4],"maxservings":8,"text":"GOAL: 6-8"},
+                {"id":"vegetables","group":"VEGETABLES","servings":[4,1],"maxservings":5,"text":"GOAL: 4-5"},
+                {"id":"fruits","group":"FRUITS","servings":[4,1],"maxservings":5,"text":"GOAL: 4-5"},
+                {"id":"dairy","group":"DAIRY","servings":[1,2],"maxservings":3,"text":"GOAL: 2-3"},
+                {"id":"meat","group":"MEAT","servings":[1,5],"maxservings":6,"text":"GOAL: <6"},
+                {"id":"nutslegumes","group":"NUTS/LEGUMES","servings":[1,4],"maxservings":5,"text":"GOAL: 4-5/WEEK"},
+                {"id":"fatsoils","group":"FATS/OILS","servings":[0,3],"maxservings":3,"text":"GOAL: 2-3/WEEK"},
+                {"id":"sweets","group":"SWEETS","servings":[1,4],"maxservings":5,"text":"GOAL: <5/WEEK"}
                ];
 
+var sodLevel = [415,1885];
+
+//product json
+var firstTime = 1; //hack - later perhaps start out with all items selected?
+var productData = {
+                    "steamfresh": {
+                        "active": 0,
+                        "info": {"grains":0,"vegetables":2,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "freshexpress": {
+                        "active": 0,
+                        "info": {"grains":0,"vegetables":2,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "barilla": {
+                        "active": 0,
+                        "info": {"grains":1,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "cheerios": {
+                        "active": 0,
+                        "info": {"grains":1,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":150}
+                    },
+                   "saralee": {
+                        "active": 0,
+                        "info": {"grains":2,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "sunmaid": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":2,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "bananas": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":1,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "craisins": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":1,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":1,"sodium":0}
+                    },
+                   "planters": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":1,"fatsoils":0,"sweets":0,"sodium":100}
+                    },
+                   "chobani": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":0,"dairy":1,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":65}
+                    },
+                   "eggs": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":0,"dairy":0,"meat":1,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":100}
+                    }
+                 };
+
+//prepare donuts
 var width = 100,
     height = 120,
     radius = Math.min(width, height) / 2;
@@ -894,6 +946,7 @@ var svg = d3.select("#diet-charts").selectAll(".pie")
       .data(servingData)
     .enter().append("svg")
       .attr("class", "pie")
+      .attr("id",function(d) {return d.group.toLowerCase().replace("/","")})
       .attr("width", width)
       .attr("height", height)
     .append("g")
@@ -936,7 +989,8 @@ var path = svg.selectAll(".arc")
         }
 
         })
-      .attr("d", arc);
+      .attr("d", arc)
+      .each(function(d) { this._current = d; });
 
 //CURRENT SERVING NUMBER
 var servingCenter = svg.append("svg:text")
@@ -945,12 +999,11 @@ var servingCenter = svg.append("svg:text")
       .attr("text-anchor", "middle")
       .text(function(d,i) {return d.servings[0]});
 
-/////////
-/// SODIUM
-/////////
+/////////////
+/// SODIUM //
+/////////////
 var sodWidth = 105,
     sodHeight = 126,
-    sodLevel = [415,1885],
     sodRadius = Math.min(sodWidth, sodHeight) / 2;
 
 var sodArc = d3.svg.arc()
@@ -996,7 +1049,8 @@ var sodPath = sodSvg.selectAll(".arc")
       .attr("fill", function(d, i) { 
             return i == 0 ? "red" : "pink";
         })
-      .attr("d", sodArc);
+      .attr("d", sodArc)
+      .each(function(d) { this._current = d; });
 
 //CURRENT SERVING NUMBER
 var sodServingCenter = sodSvg.append("svg:text")
@@ -1019,3 +1073,79 @@ var ss = new ScrollSpy({
         //} 
 });
 
+
+// ANIMATION //
+$$('.product-box').addEvent('click', function(){
+    //flip color
+    !productData[this.id]["active"] ? this.setStyle("background-color","rgba(255, 255, 0, 0.24)") : this.setStyle("background-color","rgba(0, 0, 0, 0.03)");
+
+    //reset all arcs and servings to zero if first time
+    if(firstTime) {
+        path = path.data(
+            function(d) {
+                d.servings[0] = 0;
+                d.servings[1] = d.maxservings;
+                return pie(d.servings);
+            });
+        sodpath = sodPath.data(pie([0,2300]));
+        servingCenter.text('0');
+        sodServingCenter.text('0');
+        path.transition().duration(750).attrTween("d", arcTween);
+        sodpath.transition().duration(750).attrTween("d", arcTween);
+        firstTime = 0; //shutoff
+    }
+
+
+    //flip active state
+    productData[this.id]["active"] = 1 - productData[this.id]["active"];
+
+    //modify servings and serving arc based on state of each item in json array
+    if(productData[this.id]["active"])
+    {
+        //for each item in array, add serving
+        var tInfo = productData[this.id]["info"];
+        for (var infoKey in tInfo) {
+            path = path.data(function(d){
+                if(d.id == infoKey) {
+                    d.servings[0]+=tInfo[infoKey];
+                    d.servings[1]-=tInfo[infoKey];
+                    $(infoKey).getElement('g').getElement('.serving-label').set("text",d.servings[0]);
+                    return pie(d.servings);
+                } else {
+                    return pie(d.servings);
+                }
+            });   
+        }
+        path.transition().duration(750).attrTween("d", arcTween);
+    } else {
+        //for each item in array, add serving
+        var tInfo = productData[this.id]["info"];
+        for (var infoKey in tInfo) {
+            path = path.data(function(d){
+                if(d.id == infoKey) {
+                    d.servings[0]-=tInfo[infoKey];
+                    d.servings[1]+=tInfo[infoKey];
+                    $(infoKey).getElement('g').getElement('.serving-label').set("text",d.servings[0]);
+                    return pie(d.servings);
+                } else {
+                    return pie(d.servings);
+                }
+            });   
+        }
+        path.transition().duration(750).attrTween("d", arcTween);
+    }
+
+
+});
+
+
+// Store the displayed angles in _current.
+// Then, interpolate from _current to the new angles.
+// During the transition, _current is updated in-place by d3.interpolate.
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
