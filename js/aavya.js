@@ -1096,61 +1096,45 @@ $$('.product-box').addEvent('click', function(){
         firstTime = 0; //shutoff
     }
 
-
     //flip active state
     productData[this.id]["active"] = 1 - productData[this.id]["active"];
+    prodID = this.id;
 
     //modify servings and serving arc based on state of each item in json array
-    if(productData[this.id]["active"])
-    {
-        //for each item in array, add serving
-        var tInfo = productData[this.id]["info"];
-        for (var infoKey in tInfo) {
-            path = path.data(function(d){
-                if(d.id == infoKey) {
-                    d.servings[0]+=tInfo[infoKey];
-                    d.servings[1]-=tInfo[infoKey];
-                    $(infoKey).getElementsByTagName('g')[0].getElementsByClassName('serving-label')[0].textContent = d.servings[0];
-                    return pie(d.servings);
-                } else if (infoKey == "sodium"){
-                    sodLevel[0] += tInfo[infoKey]/8;
-                    sodServingCenter.text(sodLevel[0]);
-                    sodLevel[1] -= tInfo[infoKey]/8;
-                    sodpath = sodPath.data(pie(sodLevel));
-                    return pie(d.servings);
-                } else {
-                    return pie(d.servings);
-                }
-            });   
+    var tInfo = productData[prodID]["info"];
+    for (var infoKey in tInfo) {
+        //Update sodium chart
+        if(infoKey == "sodium") {
+            if(productData[prodID]["active"]) {
+                sodLevel[0] += tInfo[infoKey];
+                sodLevel[1] -= tInfo[infoKey];
+            } else {
+                sodLevel[0] -= tInfo[infoKey];
+                sodLevel[1] += tInfo[infoKey];
+            }
+            sodServingCenter.text(sodLevel[0]);
+            sodpath = sodPath.data(pie(sodLevel));
         }
-        path.transition().duration(750).attrTween("d", arcTween);
-        sodpath.transition().transition(750).attrTween("d", arcTween);
-    } else {
-        //for each item in array, add serving
-        var tInfo = productData[this.id]["info"];
-        for (var infoKey in tInfo) {
-            path = path.data(function(d){
-                if(d.id == infoKey) {
-                    d.servings[0]-=tInfo[infoKey];
-                    d.servings[1]+=tInfo[infoKey];
-                    $(infoKey).getElementsByTagName('g')[0].getElementsByClassName('serving-label')[0].textContent = d.servings[0];
-                    return pie(d.servings);
-                } else if (infoKey == "sodium"){
-                    sodLevel[0] -= tInfo[infoKey]/8;
-                    sodServingCenter.text(sodLevel[0]);
-                    sodLevel[1] += tInfo[infoKey]/8;
-                    sodpath = sodPath.data(pie(sodLevel));
-                    return pie(d.servings);
+
+        //Update rest of charts
+        path = path.data(function(d){
+            if(d.id == infoKey) {
+                if(productData[prodID]["active"]) {
+                    d.servings[0] += tInfo[infoKey];
+                    d.servings[1] -= tInfo[infoKey];
                 } else {
-                    return pie(d.servings);
+                    d.servings[0] -= tInfo[infoKey];
+                    d.servings[1] += tInfo[infoKey];
                 }
-            });   
-        }
-        path.transition().duration(750).attrTween("d", arcTween);
-        sodpath.transition().transition(750).attrTween("d", arcTween);
+                $(infoKey).getElementsByTagName('g')[0].getElementsByClassName('serving-label')[0].textContent = d.servings[0];
+                return pie(d.servings);
+            } else {
+                return pie(d.servings);
+            }
+        });   
     }
-
-
+    path.transition().duration(750).attrTween("d", arcTween);
+    sodpath.transition().transition(750).attrTween("d", arcTween);
 });
 
 
