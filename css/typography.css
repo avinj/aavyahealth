@@ -154,7 +154,7 @@ box-shadow: 0 10px 6px -6px #777;
     }
 
 /*risk modification*/
-div.habits h6 {font-weight:bold; font-size:14px;}
+div.habits h5 {text-align:center;}
 .risk-down {
     position:relative;
     width:0px;
