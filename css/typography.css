@@ -142,7 +142,7 @@ body > .row {
 .small-text{font-size:14px}
 .bold {font-weight: bold}
 .chiclet {font-size:.85em;border-radius:10px; background-color:#eee; padding:.25em .5em; text-shadow:0 1px 0 rgba(255, 255, 255, 0.5); border:1px solid #ccc; margin-right:4px}
-.tac {text-align: center}
+.tac {text-align: center;}
 
 /*brand recommendation*/
 .brand-info{margin-top:15px}
@@ -407,7 +407,7 @@ span[data-var$="risk"] {
     border-radius:3px;
     border:1px solid #dfdfdf;
 }
-.mtl {margin-top:36px; font-weight:bold;}
+.mtl {margin-top:36px;}
 .small, .small * {font-size:12px;}
 .recos .columns {opacity:.85;transition:all .2s ease-in-out;}
 .recos .columns:hover {opacity:1;}
