@@ -979,7 +979,7 @@ var path = svg.selectAll(".arc")
     .enter().append("path")
       .attr("class","arc")
       .attr("fill", function(d, i) { 
-        mygroup = $(this).getParent().getFirst('text').get('text');
+        mygroup = this.parentElement.getElementsByClassName('diet-label')[0].textContent;
         if (mygroup == "MEAT" || mygroup == "NUTS/LEGUMES") {
             return i == 0 ? "gold" : "lightgoldenrodyellow";
         } else if (mygroup == "FATS/OILS" || mygroup == "SWEETS") {
@@ -1110,7 +1110,7 @@ $$('.product-box').addEvent('click', function(){
                 if(d.id == infoKey) {
                     d.servings[0]+=tInfo[infoKey];
                     d.servings[1]-=tInfo[infoKey];
-                    $(infoKey).getElement('g').getElement('.serving-label').set("text",d.servings[0]);
+                    $(infoKey).getElementsByTagName('g')[0].getElementsByClassName('serving-label')[0].textContent = d.servings[0];
                     return pie(d.servings);
                 } else if (infoKey == "sodium"){
                     sodLevel[0] += tInfo[infoKey]/8;
@@ -1133,7 +1133,7 @@ $$('.product-box').addEvent('click', function(){
                 if(d.id == infoKey) {
                     d.servings[0]-=tInfo[infoKey];
                     d.servings[1]+=tInfo[infoKey];
-                    $(infoKey).getElement('g').getElement('.serving-label').set("text",d.servings[0]);
+                    $(infoKey).getElementsByTagName('g')[0].getElementsByClassName('serving-label')[0].textContent = d.servings[0];
                     return pie(d.servings);
                 } else if (infoKey == "sodium"){
                     sodLevel[0] -= tInfo[infoKey]/8;
