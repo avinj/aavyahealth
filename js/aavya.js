@@ -1044,10 +1044,7 @@ $$('.product-box').addEvent('click', function(){
     path.transition().duration(750).attrTween("d", arcTween);
 });
 
-
-// Store the displayed angles in _current.
-// Then, interpolate from _current to the new angles.
-// During the transition, _current is updated in-place by d3.interpolate.
+//interpolation function to find new arc angle
 function arcTween(a) {
   var i = d3.interpolate(this._current, a);
   this._current = i(0);
