@@ -875,10 +875,9 @@ var servingData = [{"id":"grains","group":"GRAINS","servings":[4,4],"maxservings
                 {"id":"meat","group":"MEAT","servings":[1,5],"maxservings":6,"text":"GOAL: <6"},
                 {"id":"nutslegumes","group":"NUTS/LEGUMES","servings":[1,4],"maxservings":5,"text":"GOAL: 4-5/WEEK"},
                 {"id":"fatsoils","group":"FATS/OILS","servings":[0,3],"maxservings":3,"text":"GOAL: 2-3/WEEK"},
-                {"id":"sweets","group":"SWEETS","servings":[1,4],"maxservings":5,"text":"GOAL: <5/WEEK"}
+                {"id":"sweets","group":"SWEETS","servings":[1,4],"maxservings":5,"text":"GOAL: <5/WEEK"},
+                {"id":"sodium","group":"SODIUM","servings":[415,1885],"maxservings":2300,"text":"GOAL: <2300 mg"}
                ];
-
-var sodLevel = [415,1885];
 
 //product json
 var firstTime = 1; //hack - later perhaps start out with all items selected?
@@ -952,11 +951,6 @@ var svg = d3.select("#diet-charts").selectAll(".pie")
     .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-//INNER CIRCLE
-var centerPulse = svg.append("svg:circle")
-      .attr("r",radius-6)
-      .attr("class","serving-color-val");
-
 //FOOD GROUP LABEL
 var foodGroupLabel = svg.append("svg:text")
       .attr("class", "diet-label")
@@ -982,7 +976,7 @@ var path = svg.selectAll(".arc")
         mygroup = this.parentElement.getElementsByClassName('diet-label')[0].textContent;
         if (mygroup == "MEAT" || mygroup == "NUTS/LEGUMES") {
             return i == 0 ? "gold" : "lightgoldenrodyellow";
-        } else if (mygroup == "FATS/OILS" || mygroup == "SWEETS") {
+        } else if (mygroup == "FATS/OILS" || mygroup == "SWEETS" || mygroup == "SODIUM") {
             return i == 0 ? "red" : "pink";
         } else {
             return i == 0 ? "green" : "lightgreen";
@@ -994,70 +988,16 @@ var path = svg.selectAll(".arc")
 
 //CURRENT SERVING NUMBER
 var servingCenter = svg.append("svg:text")
-      .attr("class", "serving-label")
-      .attr("dy", 19)
+      .attr("class","serving-label")
+      .attr("style", function(d) {
+        return d.id == "sodium" ? "font-size:20px" : "font-size:50px";
+      })
+      .attr("dy", function(d) {
+            return d.id == "sodium" ? 10 : 19;
+        })
       .attr("text-anchor", "middle")
       .text(function(d,i) {return d.servings[0]});
 
-/////////////
-/// SODIUM //
-/////////////
-var sodWidth = 105,
-    sodHeight = 126,
-    sodRadius = Math.min(sodWidth, sodHeight) / 2;
-
-var sodArc = d3.svg.arc()
-    .innerRadius(sodRadius - 5)
-    .outerRadius(sodRadius - 20);
-
-var pie = d3.layout.pie()
-    .sort(null);
-
-var sodSvg = d3.select("#sodium-chart")
-     .append("svg")
-      .attr("id", "sodium")
-      .attr("class", "sodPie")
-      .attr("width", sodWidth)
-      .attr("height", sodHeight)
-    .append("g")
-      .attr("transform", "translate(" + sodWidth / 2 + "," + sodHeight / 2 + ")");
-
-//INNER CIRCLE
-var sodCenterPulse = sodSvg.append("svg:circle")
-      .attr("r",radius-6)
-      .attr("class","serving-color-val");
-
-//FOOD GROUP LABEL
-var sodGroupLabel = sodSvg.append("svg:text")
-      .attr("class", "diet-label")
-      .attr("dy", -50)
-      .attr("text-anchor", "middle") 
-      .text("SODIUM (MG)");
-
-//RECOMMENDED SERVING
-var sodReccServing = sodSvg.append("svg:text")
-     .attr("class", "serving-recc-label")
-     .attr("dy", 60)
-     .attr("text-anchor", "middle") 
-     .text("GOAL: <2300 mg");
-
-//GRAPH ARCS
-var sodPath = sodSvg.selectAll(".arc")
-      .data(pie(sodLevel))
-    .enter().append("path")
-      .attr("class","arc")
-      .attr("fill", function(d, i) { 
-            return i == 0 ? "red" : "pink";
-        })
-      .attr("d", sodArc)
-      .each(function(d) { this._current = d; });
-
-//CURRENT SERVING NUMBER
-var sodServingCenter = sodSvg.append("svg:text")
-      .attr("class", "serving-label-sodium")
-      .attr("dy", 10)
-      .attr("text-anchor", "middle")
-      .text(sodLevel[0]);
 
 ////// "LAZY" LOAD GRAPHS ////
 var minView = document.body.scrollHeight*.40;
@@ -1065,11 +1005,9 @@ var ss = new ScrollSpy({
     min: minView, 
         onEnter: function() { 
             $('diet-charts').morph({opacity: 1});
-            $('sodium-chart').morph({opacity: 1});
         }, 
         //onLeave: function() { 
         //    $('diet-charts').morph({opacity: 0});
-        //    $('sodium-chart').morph({opacity: 0});
         //} 
 });
 
@@ -1087,12 +1025,8 @@ $$('.product-box').addEvent('click', function(){
                 d.servings[1] = d.maxservings;
                 return pie(d.servings);
             });
-        sodpath = sodPath.data(pie([0,2300]));
         servingCenter.text('0');
-        sodServingCenter.text('0');
-        sodLevel = [0,2300];
         path.transition().duration(750).attrTween("d", arcTween);
-        sodpath.transition().duration(750).attrTween("d", arcTween);
         firstTime = 0; //shutoff
     }
 
@@ -1103,20 +1037,6 @@ $$('.product-box').addEvent('click', function(){
     //modify servings and serving arc based on state of each item in json array
     var tInfo = productData[prodID]["info"];
     for (var infoKey in tInfo) {
-        //Update sodium chart
-        if(infoKey == "sodium") {
-            if(productData[prodID]["active"]) {
-                sodLevel[0] += tInfo[infoKey];
-                sodLevel[1] -= tInfo[infoKey];
-            } else {
-                sodLevel[0] -= tInfo[infoKey];
-                sodLevel[1] += tInfo[infoKey];
-            }
-            sodServingCenter.text(sodLevel[0]);
-            sodpath = sodPath.data(pie(sodLevel));
-        }
-
-        //Update rest of charts
         path = path.data(function(d){
             if(d.id == infoKey) {
                 if(productData[prodID]["active"]) {
@@ -1134,7 +1054,6 @@ $$('.product-box').addEvent('click', function(){
         });   
     }
     path.transition().duration(750).attrTween("d", arcTween);
-    sodpath.transition().transition(750).attrTween("d", arcTween);
 });
 
 
