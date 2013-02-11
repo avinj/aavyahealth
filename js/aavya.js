@@ -1090,6 +1090,7 @@ $$('.product-box').addEvent('click', function(){
         sodpath = sodPath.data(pie([0,2300]));
         servingCenter.text('0');
         sodServingCenter.text('0');
+        sodLevel = [0,2300];
         path.transition().duration(750).attrTween("d", arcTween);
         sodpath.transition().duration(750).attrTween("d", arcTween);
         firstTime = 0; //shutoff
@@ -1111,12 +1112,19 @@ $$('.product-box').addEvent('click', function(){
                     d.servings[1]-=tInfo[infoKey];
                     $(infoKey).getElement('g').getElement('.serving-label').set("text",d.servings[0]);
                     return pie(d.servings);
+                } else if (infoKey == "sodium"){
+                    sodLevel[0] += tInfo[infoKey]/8;
+                    sodServingCenter.text(sodLevel[0]);
+                    sodLevel[1] -= tInfo[infoKey]/8;
+                    sodpath = sodPath.data(pie(sodLevel));
+                    return pie(d.servings);
                 } else {
                     return pie(d.servings);
                 }
             });   
         }
         path.transition().duration(750).attrTween("d", arcTween);
+        sodpath.transition().transition(750).attrTween("d", arcTween);
     } else {
         //for each item in array, add serving
         var tInfo = productData[this.id]["info"];
@@ -1127,12 +1135,19 @@ $$('.product-box').addEvent('click', function(){
                     d.servings[1]+=tInfo[infoKey];
                     $(infoKey).getElement('g').getElement('.serving-label').set("text",d.servings[0]);
                     return pie(d.servings);
+                } else if (infoKey == "sodium"){
+                    sodLevel[0] -= tInfo[infoKey]/8;
+                    sodServingCenter.text(sodLevel[0]);
+                    sodLevel[1] += tInfo[infoKey]/8;
+                    sodpath = sodPath.data(pie(sodLevel));
+                    return pie(d.servings);
                 } else {
                     return pie(d.servings);
                 }
             });   
         }
         path.transition().duration(750).attrTween("d", arcTween);
+        sodpath.transition().transition(750).attrTween("d", arcTween);
     }
 
 
