@@ -90,7 +90,7 @@ $(document).ready(function() {
 		});
 
 		//modify risk bubble scales and color depending on risk
-		riskObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newRisk*bubbleScale), allRisk];
+		riskObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newRisk*bubbleScale), newRisk];
 		
 		for (obj in riskObject)
 			$(obj).css("width",riskObject[obj][0]+"px").css("height",riskObject[obj][0]+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
@@ -170,7 +170,7 @@ var framingham = {
 	    }
 	
 	    var risk =  1.0 - Math.pow(base, Math.exp(betaSum));
-	    return Math.round(Math.round(1000 * risk)/10);
+	    return Math.ceil(Math.round(1000 * risk)/10);
 	}
 };
 
