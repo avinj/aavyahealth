@@ -98,9 +98,17 @@ $(document).ready(function() {
 		//modify risk bubble scales and color depending on risk
 		riskObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newRisk*bubbleScale), newRisk];
 		
-		for (obj in riskObject)
-			$(obj).css("width",Math.min(180,riskObject[obj][0])+"px").css("height",Math.min(180,riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
+		for (obj in riskObject) {
+			if (obj == "#main-risk-bubble") {
+				$(obj).css("width",riskObject[obj][0]+"px").css("height",riskObject[obj][0]+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
 
+			} else {
+				$(obj).css("width",(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0]+"px").css("height",(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0]+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
+
+			}
+		}
+
+			
 	});
 
 	// Delay visibility until loaded
