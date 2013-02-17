@@ -17,7 +17,7 @@ $(document).ready(function() {
 		//product categories and risk counts open
 		var pOpen = 0, riskCount = 0;
 		var origSide = 70;
-		var bubbleScale = 0.03125;
+		var bubbleScale = 0.125;
 		var riskObject = {};
 
 		// re-calculate actual risk
