@@ -943,8 +943,6 @@ var svg = d3.select("#diet-charts").selectAll(".pie")
         return d.id == "sodium" ? "translate(" + width / 2 + "," + 1.25*(height / 2) + ")" : "translate(" + width / 2 + "," + height / 2 + ")";
       });
 
-      
-
 //FOOD GROUP LABEL
 var foodGroupLabel = svg.append("svg:text")
       .attr("class", "diet-label")

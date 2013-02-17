@@ -1,0 +1,486 @@
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+
+/* #Site Styles
+================================================== */
+body {
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAFUlEQVQImWNggILrT7/+x8FgYGAAANcTCxHxaQd2AAAAAElFTkSuQmCC") repeat transparent;
+	font-family: "Helvetica Neue", "HelveticaNeue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+/* #Page Styles
+================================================== */
+
+.module {
+	border: 2px solid #ccc;
+	border-top: 0 none;
+	border-radius: 6px;
+	margin: 24px auto;
+	background-color: #fefefe;
+}
+
+.header {
+	border-radius: 6px 6px 0 0;
+	background-color: #333;
+	float: left;
+	display: inline;
+	width: 100%;
+}
+
+.sub-header {
+	background: #f4f4f4;
+	border-bottom: 1px solid #ccc;
+	float: left;
+	display: inline;
+	width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+	font-weight: bold;
+	padding: 8px 0;
+	color: #555;
+}
+
+.module h1 {
+	font-size: 21px;
+	padding: 16px 0 0 15px;
+	line-height: 24px;
+	font-weight: normal;
+	text-shadow: none;
+	color: #f7f7f7;
+}
+
+.module h3 {
+	font-size: 16px;
+	line-height: 16px;
+	padding: 16px 15px;
+	margin-bottom:0;
+	border-bottom: 1px solid #ccc
+}
+
+h6 {
+	font-size: 10px;
+	line-height: 16px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+}
+
+.header-logo {
+	float: left;
+	width: 50px;
+	margin: 15px;
+}
+
+button, .button {
+	height: 50px;
+	width: 90%;
+	padding: 15px 0;
+	font-size: 14px;
+}
+
+#age, #blood, #total-cholesterol, #hdl-cholesterol, #ldl-cholesterol, #trig-cholesterol  { opacity:0; }
+
+.slider {
+  width: 59%;
+  float: left;
+  margin-top:15px;
+  margin-bottom: 10px;
+}
+
+.slider > .dragger {
+  background: #6e6e6e;
+  background: -webkit-linear-gradient(top, #888, #575757);
+  background: -moz-linear-gradient(top, #888, #575757);
+  background: linear-gradient(top, #888, #575757);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#888888', endColorstr='#575757');
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 2px 8px rgba(0,0,0,0.2);
+  -moz-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 8px rgba(0,0,0,0.2);
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  border: 1px solid #555;
+  width: 20px;
+  height: 20px;
+}
+
+.slider > .dragger:hover { background: -webkit-linear-gradient(top, #575757, #888); }
+
+.slider > .track {
+  background-color: #B1E1ED;
+
+  -webkit-box-shadow: inset 0 -2px 4px rgba(0,0,0,0.15);
+  -moz-box-shadow: inset 0 -2px 4px rgba(0,0,0,0.15);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.15);
+
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+
+  height: 12px;
+  margin-bottom: 1.5em;
+  display: inline-block;
+}
+
+#total-cholesterol-slider > .track {
+	background: #33ad20;
+	background: -moz-linear-gradient(left, #3D8E7C 0%, #33AD20 42.86%, #FFD14E 42.86%, #EFF927 54.29%, #E95C41 54.29%, #FF0905 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#3D8E7C), color-stop(42.86%,#33ad20), color-stop(42.86%,#FFD14E), color-stop(54.29%,#eff927), color-stop(54.29%,#E95C41), color-stop(100%,#ff0905));
+	background: -webkit-linear-gradient(left, #3D8E7C 0%, #33AD20 42.86%, #FFD14E 42.86%, #EFF927 54.29%, #E95C41 54.29%, #FF0905 100%);
+	background: -o-linear-gradient(left, #3D8E7C 0%, #33AD20 42.86%, #FFD14E 42.86%, #EFF927 54.29%, #E95C41 54.29%, #FF0905 100%);
+	background: -ms-linear-gradient(left, #3D8E7C 0%, #33AD20 42.86%, #FFD14E 42.86%, #EFF927 54.29%, #E95C41 54.29%, #FF0905 100%);
+	background: linear-gradient(to right, #3D8E7C 0%, #33AD20 42.86%, #FFD14E 42.86%, #EFF927 54.29%, #E95C41 54.29%, #FF0905 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3D8E7C', endColorstr='#ff0905',GradientType=1 );
+	width: 90%;
+}
+
+#ldl-cholesterol-slider > .track {
+	background: #33ad20;
+	background: -moz-linear-gradient(left, #3D8E7C 0%, #33AD20 33.33%, #FFD14E 33.33%, #EFF927 53.33%, #E95C41 53.33%, #FF0905 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#3D8E7C), color-stop(33.33%,#33ad20), color-stop(33.33%,#FFD14E), color-stop(53.33%,#eff927), color-stop(53.33%,#E95C41), color-stop(100%,#ff0905));
+	background: -webkit-linear-gradient(left, #3D8E7C 0%, #33AD20 33.33%, #FFD14E 33.33%, #EFF927 53.33%, #E95C41 53.33%, #FF0905 100%);
+	background: -o-linear-gradient(left, #3D8E7C 0%, #33AD20 33.33%, #FFD14E 33.33%, #EFF927 53.33%, #E95C41 53.33%, #FF0905 100%);
+	background: -ms-linear-gradient(left, #3D8E7C 0%, #33AD20 33.33%, #FFD14E 33.33%, #EFF927 53.33%, #E95C41 53.33%, #FF0905 100%);
+	background: linear-gradient(to right, #3D8E7C 0%, #33AD20 33.33%, #FFD14E 33.33%, #EFF927 53.33%, #E95C41 53.33%, #FF0905 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3D8E7C', endColorstr='#ff0905',GradientType=1 );
+	width: 90%;
+}
+
+#hdl-cholesterol-slider > .track {
+	background: #ff0905;
+	background: -moz-linear-gradient(left, #E95C41 0%, #FF0905 26.67%, #EFF927 26.67%, #FFD14E 40%, #33AD20 40%, #3D8E7C 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#E95C41), color-stop(26.67%,#ff0905), color-stop(26.67%,#eff927), color-stop(40%,#DA3C26), color-stop(40%,#33ad20), color-stop(100%,#3D8E7C));
+	background: -webkit-linear-gradient(left, #E95C41 0%, #FF0905 26.67%, #EFF927 26.67%, #FFD14E 40%, #33AD20 40%, #3D8E7C 100%);
+	background: -o-linear-gradient(left, #E95C41 0%, #FF0905 26.67%, #EFF927 26.67%, #DA3C26 40%, #33AD20 40%, #3D8E7C 100%);
+	background: -ms-linear-gradient(left, #E95C41 0%, #FF0905 26.67%, #EFF927 26.67%, #FFD14E 40%, #33AD20 40%, #3D8E7C 100%);
+	background: linear-gradient(to right, #E95C41 0%, #FF0905 26.67%, #EFF927 26.67%, #FFD14E 40%, #33AD20 40%, #3D8E7C 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E95C41', endColorstr='#3D8E7C',GradientType=1 );
+}
+
+#trig-cholesterol-slider > .track {
+	background: #33ad20;
+	background: -moz-linear-gradient(left, #3D8E7C 0%, #33AD20 25.63%, #FFD14E 25.63%, #EFF927 36.18%, #E95C41 36.18%, #FF0905 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#3D8E7C), color-stop(25.63%,#33ad20), color-stop(25.63%,#FFD14E), color-stop(36.18%,#eff927), color-stop(36.18%,#E95C41), color-stop(100%,#ff0905));
+	background: -webkit-linear-gradient(left, #3D8E7C 0%, #33AD20 25.63%, #FFD14E 25.63%, #EFF927 36.18%, #E95C41 36.18%, #FF0905 100%);
+	background: -o-linear-gradient(left, #3D8E7C 0%, #33AD20 25.63%, #FFD14E 25.63%, #EFF927 36.18%, #E95C41 36.18%, #FF0905 100%);
+	background: -ms-linear-gradient(left, #3D8E7C 0%, #33AD20 25.63%, #FFD14E 25.63%, #EFF927 36.18%, #E95C41 36.18%, #FF0905 100%);
+	background: linear-gradient(to right, #3D8E7C 0%, #33AD20 25.63%, #FFD14E 25.63%, #EFF927 36.18%, #E95C41 36.18%, #FF0905 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3D8E7C', endColorstr='#ff0905',GradientType=1 );
+	width: 90%;
+}
+
+#hdl-cholesterol-slider .track:before, #ldl-cholesterol-slider .track:before, #total-cholesterol-slider .track:before, #trig-cholesterol-slider .track:before {
+	position: relative;
+	top: -25px;
+	content: "Your Peers\A\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0▼";
+    font-size: 10px;
+    line-height: 1;
+    display:block;
+    white-space: pre-wrap;
+    text-transform: uppercase;
+}
+#hdl-cholesterol-slider .track:before { left: 56%; }
+#ldl-cholesterol-slider .track:before { left: 16.5%; }
+#total-cholesterol-slider .track:before { left: 28%; }
+#trig-cholesterol-slider .track:before { left: 5%; }
+
+#hdl-cholesterol-slider, #ldl-cholesterol-slider, #total-cholesterol-slider, #trig-cholesterol-slider { width: 90%; }
+
+.slider-stats {
+	display: inline-block;
+	font-size: 21px;
+	line-height: 24px;
+	position: relative;
+	margin-left: 5px;
+	top: 10px;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.slider-stats-chol {
+	display: inline-block;
+	position: relative;
+	margin-left: 5px;
+	top: 10px;
+	font-size: 24px;
+	line-height: 32px;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.stats-chol{
+	margin-bottom: 25px;
+	position: relative;
+	float: left;
+	width: 100%;
+	text-align:center;
+}
+
+.chol h6{
+	margin-bottom:14px;
+}
+
+.slider-left, .slider-middle { float:left; position: relative; }
+.slider-middle-tchol { left: 18%; }
+.slider-middle-ldlchol { left: 15%; }
+.slider-middle-hdlchol { left: 19%; }
+.slider-middle-trig {left: 8%; }
+.slider-right { position: relative; float:right; right: 6%; }
+.slider-left, .slider-middle, .slider-right {
+	font-size: 10px;
+	margin: 0;
+	line-height: 12px;
+	text-transform: uppercase;
+}
+
+.gray {
+	opacity: .6;
+	display: inline-block;
+	font-size: 16px;
+	line-height: 24px;
+	position: relative;
+	top: 9px;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.center { text-align: center; }
+
+#weight { width: 45%; }
+
+span.unit-gray{
+	position: relative;
+	top: 8px;
+	opacity: .6;
+	font-size: 16px;
+	float: left;
+	padding: 0 2px;
+}
+
+input.number-entry {
+	width: 15%;
+	display: inline-block;
+	position: relative;
+	font-size: 21px;
+	float: left;
+	margin: 0 4px 8px 2px;
+}
+
+.brand-logo { margin-top: 10px; }
+.brand-info { margin-top: 15px; }
+.columns p { 
+	margin-top: 10px;
+	margin-bottom: 15px;
+	font-size: 14px;
+	line-height: 1.8;
+	word-wrap:break-word; 
+}
+.box-shadow {
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+	-moz-box-shadow: 0 10px 6px -6px #777;
+	box-shadow: 0 10px 6px -6px #777;
+}
+
+.chiclet {
+	font-size: .85em;
+	font-weight: bold;
+	border-radius: 10px;
+	background-color: #eee;
+	padding: .25em .5em;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	border: 1px solid #ccc;
+	margin-right: 4px;
+}
+
+p.arrow {
+color: white;
+font-weight: bold;
+font-size: 18px;
+text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+background: url('../img/shapes/green-arrow.png') no-repeat scroll 47% -11px;
+height: 100px;
+background-size: 75px;
+padding: 7px 4% 0 0;
+margin-bottom:0;
+}
+
+p.diet-benefit {
+	font-size: 13px;
+	color: #888;
+	margin-bottom: 0;
+}
+
+p { margin: 0 28px 20px 0; }
+
+.risk-circle {
+	border-radius: 100%;
+	padding: .75em .35em;
+	text-shadow: none;
+	line-height: 2.5;
+	color: #fff;
+	background-color: green;
+}
+
+.risk-circle-single {
+	padding: .75em .65em;
+	border-radius: 100%;
+	text-shadow: none;
+	line-height: 2.5;
+	color: #fff;
+	background-color: green;
+}
+
+.food-product {
+	width: 154px;
+}
+
+.product-box {
+	float: left;
+	background-color: rgba(0, 0, 0, 0.03);
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin: 10px 0;
+	padding: 20px;
+}
+
+.daily-allow { padding: 10px 10px 0 0; }
+.green-product{ border: dashed rgba(0,100,0,0.3); }
+.yellow-product{ border: dashed rgba(200,200,0,0.3); }
+.red-product{ border: dashed rgba(200,0,0,0.3); }
+.greenred-product{
+    border-right: dashed rgba(0,100,0,0.3);
+    border-left: dashed rgba(0,100,0,0.3);
+    border-top: dashed rgba(200,0,0,0.3);
+    border-bottom: dashed rgba(200,0,0,0.3);
+}
+
+.diet-side{
+	-webkit-border-radius: 10px 0px 5px 10px;
+	border-radius: 10px 0px 5px 10px;
+	background-color: rgba(219, 255, 249, 0.57);
+	height: 300px;
+	box-shadow: 6px 0px 10px -7px #888, -6px 0px 10px -7px #888;
+}
+
+p.risk-announce {
+	font-size: 21px;
+	line-height: 24px;
+}
+
+p.risk-desc {
+	font-size: 12px;
+	margin-right: 0;
+}
+
+p.risk-subtitle {
+	font-size: 12px;
+	font-weight:bold;
+	margin-right: 0;
+}
+
+span.risk-announce-num {
+	font-weight: 500;
+	font-size: 28px;
+	color: #555;
+	white-space: nowrap;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.risk-round {
+	fill: rgba(218, 60, 38, 0.65098);
+	stroke: rgba(218, 60, 38, 0.6);
+	stroke-width: 3px;
+}
+
+#main-risk-bubble, #bp-risk-bubble, #chol-risk-bubble, #smoke-risk-bubble, #all-risk-bubble {
+	background-color: rgba(114, 193, 176, 0.65098);
+	height: 70px;
+	width: 70px;
+	text-align: center;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	position: relative;
+	border: 3px solid rgba(0,0,0, 0.1);
+	line-height: 0;
+	margin: 20px auto;
+	-webkit-transform-origin: center;
+	-moz-transform-origin: center;
+	transform-origin: center;
+	font-weight: 500;
+	font-size: 28px;
+	color: #555;
+	white-space: nowrap;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+#risk-container, #all-products, #diet, .smoke-product, .chol-product {
+	display:none;
+	width:100%;
+}
+
+.risk-percent, #bp-risk-percent, #chol-risk-percent, #smoke-risk-percent, #all-risk-percent {
+	top:50%;
+	position:relative;
+}
+
+
+/* #Media Queries
+================================================== */
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {
+		.container .columns,
+        .container .column {padding:0 15px;} /* OVERRIDE */
+	}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {
+		.container .columns,
+        .container .column {padding:0 15px;} /* OVERRIDE */
+	}
+
+
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file
+		Just create a "fonts" folder at the root,
+		copy your FontName into code below and remove
+		comment brackets */
+
+/*	@font-face {
+	    font-family: 'FontName';
+	    src: url('../fonts/FontName.eot');
+	    src: url('../fonts/FontName.eot?iefix') format('eot'),
+	         url('../fonts/FontName.woff') format('woff'),
+	         url('../fonts/FontName.ttf') format('truetype'),
+	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+	    font-weight: normal;
+	    font-style: normal; }
+*/

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Aavya Health</title>
+    <meta name="description" content="A consumer engagement platform that maps biometric data to personalized recommendations for health products and services.">
+    <meta name="author" content="Anant Vinjamoori, Josh Brandoff">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/layout.css">
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+<body>
+    <div class="container">
+        <div class="row module">
+            <div class="sixteen header">
+                <img class="header-logo two" src="img/aavya_logo.png" />
+                <h1 class="fourteen">Aavya Health</h1>
+            </div>
+            <div class="sixteen sub-header">
+                <h3>Tell us about yourself</h3>
+            </div>
+            <div class="three columns">
+                <h6>Your Gender</h6>
+                <button id="gender" value="0">Male</button>
+            </div>
+            <div class="three columns">
+                <h6>Your Race/Ethnicity</h6>
+                <select class="button">
+                    <option value="">Select One</option>
+                    <option value="caucasian">White/Caucasian</option>
+                    <option value="black">Black/African American</option>
+                    <option value="asianindian">South Asian</option>
+                    <option value="eastasian">East Asian</option>
+                    <option value="amerindian">American Indian or Alaska Native</option>
+                    <option value="other">Other</option> 
+                </select>
+            </div>
+            <div class="five columns">
+                <h6>Your Age</h6>
+                <input id="age" type="text" data-slider="true" data-slider-step="1" data-slider-range="0,120">
+                <span id="age-stats" class="slider-stats">0</span>
+                <span class="gray">Years</span>
+            </div>
+            <div class="three columns">
+                <h6>Your Height</h6>
+                <input id="height-feet" class="number-entry" type="text">
+                <span class="unit-gray">ft</span>
+                <input id="height-inches" class="number-entry" type="text">
+                <span class="unit-gray">in</span>
+            </div>
+            <div class="two columns weight omega">
+                <h6>Your Weight</h6>
+                <input id="weight" class="number-entry" type="text">
+                <span class="unit-gray">lbs</span>
+            </div>
+            <div class="sixteen sub-header">
+                <h3>Tell us about your health habits</h3>
+            </div>
+            <div class="three columns">
+                <h6>Are you diabetic?</h6>
+                <button id="diabetic" value="0">No</button>
+            </div>
+            <div class="three columns">
+                <h6>Do you smoke?</h6>
+                <button id="smoker" value="0">No</button>
+            </div>
+            <div class="five columns">
+                <h6>On hypertension medication?</h6>
+                <button id="hypertension" value="0">No</button>
+            </div>
+            <div class="five columns omega">
+                <h6>Your max systolic blood pressure?</h6>
+                <input style="margin-left:6px" id="blood" type="text" data-slider="true" data-slider-step="1" data-slider-range="70,199" >
+                <span id="blood-stats" class="slider-stats">70</span>
+                <span class="gray">mmHg</span>
+            </div>
+            <div class="sixteen sub-header">
+                <h3>Tell us your cholesterol numbers</h3>
+            </div>
+            <div class="chol four columns">
+                <h6>Total Cholesterol</h6>
+                <input id="total-cholesterol" type="text" data-slider="true" data-slider-step="1" data-slider-range="50,400">
+                <div class="slider-left">
+                    Desirable
+                </div>
+                <div class="slider-middle slider-middle-tchol">
+                    Borderline
+                </div>
+                <div class="slider-right">
+                    High
+                </div>
+                <div class="stats-chol">
+                    <span id="total-cholesterol-stats" class="slider-stats-chol">50</span>
+                    <span class="gray">mg/DL</span>
+                </div>
+            </div>
+            <div class="chol four columns">
+                <h6>LDL Cholesterol</h6>
+                <input id="ldl-cholesterol" type="text" data-slider="true" data-slider-step="1" data-slider-range="60,250">
+                <div class="slider-left">
+                    Optimal
+                </div>
+                <div class="slider-middle slider-middle-ldlchol">
+                    Borderline
+                </div>
+                <div class="slider-right">
+                    High
+                </div>
+                <div class="stats-chol">
+                    <span id="ldl-cholesterol-stats" class="slider-stats-chol">60</span>
+                    <span class="gray">mg/DL</span>
+                </div>
+            </div>
+            <div class="chol four columns">
+                <h6>HDL Cholesterol</h6>
+                <input id="hdl-cholesterol" type="text" data-slider="true" data-slider-step="1" data-slider-range="10,80">
+                 <div class="slider-left">
+                    Low
+                </div>
+                <div class="slider-middle slider-middle-hdlchol">
+                    Borderline
+                </div>
+                <div class="slider-right">
+                    Optimal
+                </div>
+                <div class="stats-chol">
+                    <span id="hdl-cholesterol-stats" class="slider-stats-chol">10</span>
+                    <span class="gray">mg/DL</span>
+                </div>
+            </div>
+            <div class="chol four columns omega">
+                <h6>Triglycerides</h6>
+                <input id="trig-cholesterol" type="text" data-slider="true" data-slider-step="1" data-slider-range="30,500">
+                 <div class="slider-left">
+                    Optimal
+                </div>
+                <div class="slider-middle slider-middle-trig">
+                    Borderline
+                </div>
+                <div class="slider-right">
+                    High
+                </div>
+                <div class="stats-chol">
+                    <span id="trig-cholesterol-stats" class="slider-stats-chol">30</span>
+                    <span class="gray">mg/DL</span>
+                </div>
+            </div>
+            <div id="risk-container">
+                <div class="sub-header sixteen">
+                    <h3>Your risk analysis</h3>
+                </div>
+                <div class="sixteen columns">
+                    <p class="center risk-announce">You have a <span class="risk-announce-num" id="risk-announce-val">0%</span> risk of having a heart attack or stroke in the next 10 years.</p>
+                    <div class="risk-bubble center" id="main-risk-bubble"><span class="risk-percent">0%</span></div>
+                </div>
+                <div class="sixteen columns clearfix center">
+                    <div id="risk-blood" class="risk four columns alpha">
+                        <h5>Your risk would be:</h5>
+                        <div class="risk-bubble" id="bp-risk-bubble"><span id="bp-risk-percent">0%</span></div>
+                        <p class="risk-subtitle">if you lower your blood pressure.</p>
+                        <p class="risk-desc">Blood pressure can be reduced by losing weight and adopting a diet low in sodium</p>
+                    </div>
+                    <div id="risk-chol" class="risk four columns">
+                        <h5>Your risk would be:</h5>
+                        <div class="risk-bubble" id="chol-risk-bubble"><span id="chol-risk-percent">0%</span></div>
+                        <p class="risk-subtitle">if you lower your cholesterol.</p>
+                        <p class="risk-desc">High cholesterol can cause plaques to develop in your blood vessels, increasing the risk of a heart attack or stroke. You can control your cholesterol with diet and medications.</p>
+                    </div>
+                    <div id="risk-smoke" class="risk four columns">
+                        <h5>Your risk would be:</h5>
+                        <div class="risk-bubble" id="smoke-risk-bubble"><span id="smoke-risk-percent">0%</span></div>
+                        <p class="risk-subtitle">if you quit smoking.</p>
+                        <p class="risk-desc">Cigarette smoke contains chemicals that directly damage your blood vessels. This damage places you at a greater risk of heart attack or stroke.</p>
+                    </div>
+                    <div id="risk-all" class="risk four columns omega">
+                        <h5>Your risk would be:</h5>
+                        <div class="risk-bubble" id="all-risk-bubble"><span id="all-risk-percent">0%</span></div>
+                        <p class="risk-subtitle">if you did all three.</p>
+                    </div>
+                </div>
+            </div><!--/risk-container-->
+        </div><!--/.row-->
+        <div id="all-products" class="row module">
+            <div class="sixteen header">
+                <h1>Your Personalized OTC/Supplement Recommendations</h1>
+            </div>
+            <div class="product chol-product">
+                <div class="sixteen sub-header">
+                    <h3>Supplement with Fish Oil to Reduce Your Cholesterol</h3>
+                </div>
+                <div class="eight columns">
+                    <div class="brand-logo">
+                    <img src="img/brands/nature_made.png" width="200" height="73" class="box-shadow" />
+                    </div>
+                    <div class="brand-info">
+                        <span class="chiclet">1200 mg</span>
+                        <span class="chiclet">Once daily</span>
+                        <span class="chiclet">Aisle 10</span>
+                        <p>A fish oil supplement taken once daily can be effective at bringing your cholesterol levels into an ideal range over 6 months.</p>
+                    </div>
+                </div>
+                <div class="four columns center">
+                    <p>This product can lower your risk of heart disease by:</p>
+                    <p class="arrow">13%</p>
+                </div>
+                <div class="four columns center omega">
+                    <p>Your total cholesterol can be reduced by <span class="risk-circle">20%</span></p>
+                </div>
+            </div><!--/.chol-product-->
+            <div class="product smoke-product">
+                <div class="sixteen sub-header">
+                    <h3>Wear a Nicotine Patch to Help Quit Smoking</h3>
+                </div>
+                <div class="eight columns">
+                    <div class="brand-logo">
+                    <img src="img/brands/nicoderm_cq.png" width="200" height="73" class="box-shadow" />
+                    </div>
+                    <div class="brand-info">
+                        <span class="chiclet">44 mg</span>
+                        <span class="chiclet">Once daily</span>
+                        <span class="chiclet">Aisle 10</span>
+                        <p>Daily use of a nicotine patch for 6-10 weeks can improve your chances of quitting smoking. Talk with your doctor to see if it is right for you.</p>
+                    </div>
+                </div>
+                <div class="four columns center">
+                    <p>This product can lower your risk of heart disease by:</p>
+                    <p class="arrow">15%</p>
+                </div>
+                <div class="four columns center omega">
+                    <p>Daily use of a nicotine patch can improve your chances of quitting by <span class="risk-circle">60%</span></p>
+                    <p>Take nicotine gum or a lozenge with the patch and improve your chances of quitting by an additional <span class="risk-circle">35%</span></p>
+                </div>
+            </div><!--/.smoke-product-->
+        </div><!--/.row-->
+        <div id="diet" class="row module">
+            <div class="sixteen header">
+                <h1>Your Personalized Diet Recommendations</h1>
+            </div>
+            <div class="sixteen sub-header">
+                <h3>Mediterranean Plan<br/><p class="diet-benefit">Will reduce your risk of heart disease by <span class="risk-circle-single">6%</span> and your cholesterol by <span class="risk-circle-single">2%</span>.</p></h3>
+            </div>
+            <div class="sixteen sub-header">
+                <h3>DASH Eating Plan<br/><p class="diet-benefit">Will reduce your risk of heart disease by <span class="risk-circle">12%</span> and your blood pressure by <span class="risk-circle">11%</span>. It’s also been shown to increase “good” HDL cholesterol and decrease “bad” LDL cholesterol.</p></h3>
+            </div>
+        </div><!--/.row-->
+    </div><!--/.container-->
+
+    <!-- Scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
