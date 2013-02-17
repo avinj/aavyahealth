@@ -16,8 +16,8 @@ $(document).ready(function() {
 
 		//product categories and risk counts open
 		var pOpen = 0, riskCount = 0;
-		var origSide = 70;
-		var bubbleScale = 0.125;
+		var origSide = 30;
+		var bubbleScale = 0.15;
 		var riskObject = {};
 
 		// re-calculate actual risk
@@ -99,7 +99,7 @@ $(document).ready(function() {
 		riskObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newRisk*bubbleScale), newRisk];
 		
 		for (obj in riskObject)
-			$(obj).css("width",riskObject[obj][0]+"px").css("height",riskObject[obj][0]+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
+			$(obj).css("width",Math.min(180,riskObject[obj][0])+"px").css("height",Math.min(180,riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
 
 	});
 
