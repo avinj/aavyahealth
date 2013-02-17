@@ -463,6 +463,9 @@ span.risk-announce-num {
 	@media only screen and (max-width: 479px) {
 		.container .columns,
         .container .column {padding:0 15px;} /* OVERRIDE */
+        #all-products {text-align:center;}
+        .container {margin:0; width:100%;}
+        div.risk {padding-left: 0;}
 	}
 
 
