@@ -345,6 +345,24 @@ p { margin: 0 28px 20px 0; }
 	background-color: green;
 }
 
+.heart-age-circle-single {
+	padding: .75em 1.1em;
+	border-radius: 100%;
+	text-shadow: none;
+	line-height: 2.5;
+	color: #fff;
+	background-color: green;
+}
+
+.heart-age-circle {
+	padding: .75em 0.9em;
+	border-radius: 100%;
+	text-shadow: none;
+	line-height: 2.5;
+	color: #fff;
+	background-color: green;
+}
+
 .food-product {
 	width: 154px;
 }

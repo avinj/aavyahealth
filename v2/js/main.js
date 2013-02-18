@@ -26,7 +26,7 @@ $(document).ready(function() {
 		var newRisk = framingham.calcRisk(modelType);
 		var newHeartAge = framingham.calcHeartAge(newRisk, modelType); 
 		//$(".risk-percent, #risk-announce-val").text(newRisk+"%");
-		$(".risk-percent, #risk-announce-val").text(newHeartAge);
+		$(".risk-percent, #risk-announce-val").text(newHeartAge + " years");
 
 		//hide or show risk section based on actual risk score
 		(!isNaN(newRisk) && newRisk > 0) ? $("#risk-container").slideDown("slow") : $("#risk-container").slideUp("slow"); 
@@ -37,8 +37,9 @@ $(document).ready(function() {
 			var lowCholHeartAge = framingham.calcHeartAge(lowCholRisk, modelType);
 			$(".chol-product").slideDown(500, "linear");
 			//$("#chol-risk-percent").text(lowCholRisk+"%");
-			$("#chol-risk-percent").text(lowCholHeartAge);
+			$("#chol-risk-percent").text(lowCholHeartAge + " years");
 			$("#risk-chol").fadeIn("slow");
+			lowCholRisk = Math.round(1000 * lowCholRisk)/10
 			riskObject["#chol-risk-bubble"] = [Math.max(origSide,origSide*lowCholRisk*bubbleScale), lowCholRisk];
 			heartObject["#chol-risk-bubble"] = [Math.max(origSide,origSide*lowCholHeartAge*bubbleScale), lowCholHeartAge];
 			pOpen += 1;
@@ -57,8 +58,9 @@ $(document).ready(function() {
 			var notSmokeHeartAge = framingham.calcHeartAge(notSmokeRisk, modelType);
 			$(".smoke-product").slideDown(500, "linear");
 			//$("#smoke-risk-percent").text(notSmokeRisk+"%");
-			$("#smoke-risk-percent").text(notSmokeHeartAge);
+			$("#smoke-risk-percent").text(notSmokeHeartAge + " years");
 			$("#risk-smoke").fadeIn("slow");
+			notSmokeRisk = Math.round(1000 * notSmokeRisk)/10
 			riskObject["#smoke-risk-bubble"] = [Math.max(origSide,origSide*notSmokeRisk*bubbleScale), notSmokeRisk];
 			heartObject["#smoke-risk-bubble"] = [Math.max(origSide,origSide*notSmokeHeartAge*bubbleScale), notSmokeHeartAge];
 			pOpen += 1;
@@ -76,8 +78,9 @@ $(document).ready(function() {
 			var lowBpRisk = framingham.calcRisk(modelType,["blood"]);
 			var lowBpHeartAge = framingham.calcHeartAge(lowBpRisk, modelType);
 			//$("#bp-risk-percent").text(lowBpRisk+"%");
-			$("#bp-risk-percent").text(lowBpHeartAge);
+			$("#bp-risk-percent").text(lowBpHeartAge + " years");
 			$("#risk-blood").fadeIn("slow");
+			lowBpRisk = Math.round(1000 * lowBpRisk)/10
 			riskObject["#bp-risk-bubble"] = [Math.max(origSide,origSide*lowBpRisk*bubbleScale), lowBpRisk];
 			heartObject["#bp-risk-bubble"] = [Math.max(origSide,origSide*lowBpHeartAge*bubbleScale), lowBpHeartAge];
 			riskCount += 1;
@@ -90,8 +93,9 @@ $(document).ready(function() {
 			var allRisk = framingham.calcRisk(modelType,["smoker","tc","blood"]);
 			var allHeartAge = framingham.calcHeartAge(allRisk, modelType);
 			//$("#all-risk-percent").text(allRisk+"%");
-			$("#all-risk-percent").text(allHeartAge);
+			$("#all-risk-percent").text(allHeartAge + " years");
 			$("#risk-all").fadeIn("slow");
+			allRisk = Math.round(1000 * allRisk)/10
 			riskObject["#all-risk-bubble"] = [Math.max(origSide,origSide*allRisk*bubbleScale), allRisk];
 			heartObject["#all-risk-bubble"] = [Math.max(origSide,origSide*allHeartAge*bubbleScale), allHeartAge];
 			riskCount += 1;
@@ -111,10 +115,11 @@ $(document).ready(function() {
 		}
 
 		//modify risk bubble scales and color depending on risk
+		newRisk = Math.round(1000 * newRisk)/10;
 		riskObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newRisk*bubbleScale), newRisk];
 		heartObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newHeartAge*bubbleScale), newHeartAge];
 
-		/*
+		
 		for (obj in riskObject) {
 			if (obj == "#main-risk-bubble") {
 				$(obj).css("width",Math.min(180,riskObject[obj][0])+"px").css("height",Math.min(180,riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] > 25 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 15 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
@@ -123,9 +128,9 @@ $(document).ready(function() {
 				$(obj).css("width",Math.min(180,(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0])+"px").css("height",Math.min(180,(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] >= 25 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 15 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
 
 			}
-		}*/
+		}
 
-		for (obj in heartObject) {
+		/*for (obj in heartObject) {
 			if (obj == "#main-risk-bubble") {
 				$(obj).css("width",Math.min(180,heartObject[obj][0])+"px").css("height",Math.min(180,heartObject[obj][0])+"px").css("background-color", heartObject[obj][1] > 40 ? "rgba(218, 60, 38, 0.65098)" : heartObject[obj][1] > 30 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
 
@@ -133,7 +138,7 @@ $(document).ready(function() {
 				$(obj).css("width",Math.min(180,(heartObject[obj][1]/heartObject["#main-risk-bubble"][1])*heartObject[obj][0])+"px").css("height",Math.min(180,(heartObject[obj][1]/heartObject["#main-risk-bubble"][1])*heartObject[obj][0])+"px").css("background-color", heartObject[obj][1] > 40 ? "rgba(218, 60, 38, 0.65098)" : heartObject[obj][1] > 30 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
 
 			}
-		}
+		}*/
 			
 	});
 
@@ -214,6 +219,7 @@ var framingham = {
 	    }
 	
 	    var risk =  1.0 - Math.pow(base, Math.exp(betaSum));
+
 	    return risk;
 	    //return Math.round(1000 * risk)/10;
 	},
