@@ -16,14 +16,17 @@ $(document).ready(function() {
 
 		//product categories and risk counts open
 		var pOpen = 0, riskCount = 0;
-		var origSide = 30;
-		var bubbleScale = 0.15;
+		var origSide = 30; //for risk %, use 30
+		var bubbleScale = 0.15; //for risk %, use 0.15
 		var riskObject = {};
+		var heartObject = {};
 
 		// re-calculate actual risk
 		var modelType = ($("#total-cholesterol").val() == "50" && $("#ldl-cholesterol").val() == "60" && $("#hdl-cholesterol").val() == "10") ? "BMI" : "LIPID";
 		var newRisk = framingham.calcRisk(modelType);
-		$(".risk-percent, #risk-announce-val").text(newRisk+"%");
+		var newHeartAge = framingham.calcHeartAge(newRisk, modelType); 
+		//$(".risk-percent, #risk-announce-val").text(newRisk+"%");
+		$(".risk-percent, #risk-announce-val").text(newHeartAge);
 
 		//hide or show risk section based on actual risk score
 		(!isNaN(newRisk) && newRisk > 0) ? $("#risk-container").slideDown("slow") : $("#risk-container").slideUp("slow"); 
@@ -31,10 +34,13 @@ $(document).ready(function() {
 		//slide out cholesterol products and recommendations based on risk
 		if($("#total-cholesterol").val() >= 200) {
 			var lowCholRisk = framingham.calcRisk(modelType,["tcl"]);
+			var lowCholHeartAge = framingham.calcHeartAge(lowCholRisk, modelType);
 			$(".chol-product").slideDown(500, "linear");
-			$("#chol-risk-percent").text(lowCholRisk+"%");
+			//$("#chol-risk-percent").text(lowCholRisk+"%");
+			$("#chol-risk-percent").text(lowCholHeartAge);
 			$("#risk-chol").fadeIn("slow");
 			riskObject["#chol-risk-bubble"] = [Math.max(origSide,origSide*lowCholRisk*bubbleScale), lowCholRisk];
+			heartObject["#chol-risk-bubble"] = [Math.max(origSide,origSide*lowCholHeartAge*bubbleScale), lowCholHeartAge];
 			pOpen += 1;
 			riskCount += 1;
 		} else {
@@ -48,10 +54,13 @@ $(document).ready(function() {
 		//slide out smoking products and recommendations based on risk
 		if($("#smoker").val() == "1") {
 			var notSmokeRisk = framingham.calcRisk(modelType,["smoker"]);
+			var notSmokeHeartAge = framingham.calcHeartAge(notSmokeRisk, modelType);
 			$(".smoke-product").slideDown(500, "linear");
-			$("#smoke-risk-percent").text(notSmokeRisk+"%");
+			//$("#smoke-risk-percent").text(notSmokeRisk+"%");
+			$("#smoke-risk-percent").text(notSmokeHeartAge);
 			$("#risk-smoke").fadeIn("slow");
 			riskObject["#smoke-risk-bubble"] = [Math.max(origSide,origSide*notSmokeRisk*bubbleScale), notSmokeRisk];
+			heartObject["#smoke-risk-bubble"] = [Math.max(origSide,origSide*notSmokeHeartAge*bubbleScale), notSmokeHeartAge];
 			pOpen += 1;
 			riskCount += 1;
 		} else { 
@@ -65,9 +74,12 @@ $(document).ready(function() {
 		// if blood pressure >+ 130, determine risk if lower bp to 120
 		if($("#blood").val() > 130) {
 			var lowBpRisk = framingham.calcRisk(modelType,["blood"]);
-			$("#bp-risk-percent").text(lowBpRisk+"%");
+			var lowBpHeartAge = framingham.calcHeartAge(lowBpRisk, modelType);
+			//$("#bp-risk-percent").text(lowBpRisk+"%");
+			$("#bp-risk-percent").text(lowBpHeartAge);
 			$("#risk-blood").fadeIn("slow");
 			riskObject["#bp-risk-bubble"] = [Math.max(origSide,origSide*lowBpRisk*bubbleScale), lowBpRisk];
+			heartObject["#bp-risk-bubble"] = [Math.max(origSide,origSide*lowBpHeartAge*bubbleScale), lowBpHeartAge];
 			riskCount += 1;
 		} else {
 			$("#risk-blood").fadeOut(0);
@@ -76,9 +88,12 @@ $(document).ready(function() {
 		// if all risks out, show collective decrease of risk
 		if(riskCount == 3) {
 			var allRisk = framingham.calcRisk(modelType,["smoker","tc","blood"]);
-			$("#all-risk-percent").text(allRisk+"%");
+			var allHeartAge = framingham.calcHeartAge(allRisk, modelType);
+			//$("#all-risk-percent").text(allRisk+"%");
+			$("#all-risk-percent").text(allHeartAge);
 			$("#risk-all").fadeIn("slow");
 			riskObject["#all-risk-bubble"] = [Math.max(origSide,origSide*allRisk*bubbleScale), allRisk];
+			heartObject["#all-risk-bubble"] = [Math.max(origSide,origSide*allHeartAge*bubbleScale), allHeartAge];
 			riskCount += 1;
 		} else {
 			$("#risk-all").fadeOut(0);
@@ -97,17 +112,28 @@ $(document).ready(function() {
 
 		//modify risk bubble scales and color depending on risk
 		riskObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newRisk*bubbleScale), newRisk];
-		
+		heartObject["#main-risk-bubble"] = [Math.max(origSide,origSide*newHeartAge*bubbleScale), newHeartAge];
+
+		/*
 		for (obj in riskObject) {
 			if (obj == "#main-risk-bubble") {
-				$(obj).css("width",Math.min(180,riskObject[obj][0])+"px").css("height",Math.min(180,riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
+				$(obj).css("width",Math.min(180,riskObject[obj][0])+"px").css("height",Math.min(180,riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] > 25 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 15 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
 
 			} else {
-				$(obj).css("width",Math.min(180,(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0])+"px").css("height",Math.min(180,(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] >= 10 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 1 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
+				$(obj).css("width",Math.min(180,(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0])+"px").css("height",Math.min(180,(riskObject[obj][1]/riskObject["#main-risk-bubble"][1])*riskObject[obj][0])+"px").css("background-color", riskObject[obj][1] >= 25 ? "rgba(218, 60, 38, 0.65098)" : riskObject[obj][1] > 15 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
+
+			}
+		}*/
+
+		for (obj in heartObject) {
+			if (obj == "#main-risk-bubble") {
+				$(obj).css("width",Math.min(180,heartObject[obj][0])+"px").css("height",Math.min(180,heartObject[obj][0])+"px").css("background-color", heartObject[obj][1] > 40 ? "rgba(218, 60, 38, 0.65098)" : heartObject[obj][1] > 30 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
+
+			} else {
+				$(obj).css("width",Math.min(180,(heartObject[obj][1]/heartObject["#main-risk-bubble"][1])*heartObject[obj][0])+"px").css("height",Math.min(180,(heartObject[obj][1]/heartObject["#main-risk-bubble"][1])*heartObject[obj][0])+"px").css("background-color", heartObject[obj][1] > 40 ? "rgba(218, 60, 38, 0.65098)" : heartObject[obj][1] > 30 ? "rgba(253, 189, 18, 0.65098)" : "rgba(114, 193, 176, 0.65098)");
 
 			}
 		}
-
 			
 	});
 
@@ -129,7 +155,8 @@ var framingham = {
 			"betaZeroMale": -23.9388,
 			"betaZeroFemale": -26.0145,
 			"baseMale": 0.88431,
-			"baseFemale": 0.94833		
+			"baseFemale": 0.94833,
+			"baselineNormalData": {"gender": 0,  "age": 30, "sbp": 125, "bmi": 22.5, "smoker": 0, "diabetes": 0, "trtbp": 0}		
 		},
 		"LIPID": {
 			"coefsMaleNoTrtbp": {"age": 3.06117, "sbp": 1.93303, "tcl": 1.1237, "hdl": -0.93263, "smoker": 0.65451, "diabetes": 0.57367},
@@ -140,7 +167,8 @@ var framingham = {
 			"betaZeroMale": -23.9802,
 			"betaZeroFemale": -26.1931,
 			"baseMale": 0.88936,
-			"baseFemale": 0.95012
+			"baseFemale": 0.95012,
+			"baselineNormalData": {"gender": 0, "age": 30, "sbp": 125, "tcl": 180, "hdl": 45, "smoker": 0, "diabetes": 0, "trtbp": 0}
 		}
 	},
 
@@ -171,6 +199,8 @@ var framingham = {
 			cData["tcl"] = 200;
 		if($.inArray("blood", overrides) != -1) 
 			cData["sbp"] = 120;
+		if($.inArray("heartAge", overrides) != -1)
+			cData = overrides[1]; //completely replace with passed array
 
 		var betaSum = betaZero;
 
@@ -184,21 +214,42 @@ var framingham = {
 	    }
 	
 	    var risk =  1.0 - Math.pow(base, Math.exp(betaSum));
-	    return Math.floor(Math.round(1000 * risk)/10);
-	}
-};
+	    return risk;
+	    //return Math.round(1000 * risk)/10;
+	},
 
-/*!
- * jQuery UI Touch Punch 0.1.0
- *
- * Copyright 2010, Dave Furfero
- * Dual licensed under the MIT or GPL Version 2 licenses.
- *
- * Depends:
- *  jquery.ui.widget.js
- *  jquery.ui.mouse.js
- */
-(function(c){c.support.touch=typeof Touch==="object";if(!c.support.touch){return;}var f=c.ui.mouse.prototype,g=f._mouseInit,a=f._mouseDown,e=f._mouseUp,b={touchstart:"mousedown",touchmove:"mousemove",touchend:"mouseup"};function d(h){var i=h.originalEvent.changedTouches[0];return c.extend(h,{type:b[h.type],which:1,pageX:i.pageX,pageY:i.pageY,screenX:i.screenX,screenY:i.screenY,clientX:i.clientX,clientY:i.clientY});}f._mouseInit=function(){var h=this;h.element.bind("touchstart."+h.widgetName,function(i){return h._mouseDown(d(i));});g.call(h);};f._mouseDown=function(j){var h=this,i=a.call(h,j);h._touchMoveDelegate=function(k){return h._mouseMove(d(k));};h._touchEndDelegate=function(k){return h._mouseUp(d(k));};c(document).bind("touchmove."+h.widgetName,h._touchMoveDelegate).bind("touchend."+h.widgetName,h._touchEndDelegate);return i;};f._mouseUp=function(i){var h=this;c(document).unbind("touchmove."+h.widgetName,h._touchMoveDelegate).unbind("touchend."+h.widgetName,h._touchEndDelegate);return e.call(h,i);};})(jQuery);
+	calcHeartAge: function(riskVal, calcType) {
+		var loAge = 10;
+		var hiAge = 86;
+		var testAge;
+		var testRisk;
+
+		var testData = $.extend(true, {}, framingham["values"][calcType]["baselineNormalData"]);
+		testData['gender'] = $("#gender").val();
+
+		while ((hiAge - loAge) > .2) {
+			testAge = (hiAge + loAge) / 2.0;
+			testData['age'] = testAge;
+
+			overrides = ["heartAge",testData];
+
+			testRisk  = framingham.calcRisk(calcType,overrides);
+
+			if (testRisk < riskVal)
+			{
+				loAge = testAge;
+			} else if (testRisk > riskVal) {
+				hiAge = testAge;
+			} else {
+				hiAge = testAge;
+				loAge = testAge;
+			}
+		}
+
+		return Math.round(testAge);
+	}	
+
+};
 
 /*
  * jQuery Simple Slider: Unobtrusive Numerical Slider
