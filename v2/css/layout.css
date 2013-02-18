@@ -388,12 +388,14 @@ p { margin: 0 28px 20px 0; }
     border-bottom: dashed rgba(200,0,0,0.3);
 }
 
-.diet-side{
+#diet-side{
 	-webkit-border-radius: 10px 0px 5px 10px;
 	border-radius: 10px 0px 5px 10px;
 	background-color: rgba(219, 255, 249, 0.57);
-	height: 300px;
 	box-shadow: 6px 0px 10px -7px #888, -6px 0px 10px -7px #888;
+	position: absolute;
+	width: 230px;
+	height: 1080px;
 }
 
 p.risk-announce {
@@ -456,6 +458,67 @@ span.risk-announce-num {
 .risk-percent, #bp-risk-percent, #chol-risk-percent, #smoke-risk-percent, #all-risk-percent {
 	top:50%;
 	position:relative;
+}
+
+/*diet chart*/
+#diet-charts{
+padding: 5px;
+text-align:center
+}
+
+.diet-label{
+    font-size:12px;
+    font-weight:bold;
+    fill:#555;
+}
+
+.daily-allow {
+    padding: 10px 10px 0 0;
+}
+
+.serving-label{
+    font-size:50px;
+    font-family:"Arial Black";
+    fill:#555;
+    text-shadow:0 2px white;
+}
+
+.serving-recc-label{
+    font-size:10px;
+    font-weight:bold;
+    fill:#555;
+}
+
+.serving-color-val{
+    fill:none;
+}
+
+svg{margin-top:15px;}
+
+#sodium{margin-top:0;}
+
+#autoproduct
+{
+-moz-border-radius: 15px;
+-webkit-border-radius: 15px;
+border-radius: 15px;
+border: solid 1px rgba(0, 0, 0, 0.26);
+padding: 5px;
+width: 95%;
+font-size:21px;
+}
+.diet-sidebar-section:first-child{
+border:none;
+padding:20px 0;
+}
+.diet-sidebar-section {
+border-top: 2px solid #ccc;
+border-radius: 1px;
+padding: 15px 0 20px 15px
+}
+
+.diet-button {
+	height: 100px;
 }
 
 

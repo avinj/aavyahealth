@@ -26,7 +26,7 @@ $(document).ready(function() {
 		var newRisk = framingham.calcRisk(modelType);
 		var newHeartAge = framingham.calcHeartAge(newRisk, modelType); 
 		//$(".risk-percent, #risk-announce-val").text(newRisk+"%");
-		$(".risk-percent, #risk-announce-val").text(newHeartAge + " years");
+		$(".risk-percent, #risk-announce-val").text(newHeartAge);
 
 		//hide or show risk section based on actual risk score
 		(!isNaN(newRisk) && newRisk > 0) ? $("#risk-container").slideDown("slow") : $("#risk-container").slideUp("slow"); 
@@ -37,7 +37,7 @@ $(document).ready(function() {
 			var lowCholHeartAge = framingham.calcHeartAge(lowCholRisk, modelType);
 			$(".chol-product").slideDown(500, "linear");
 			//$("#chol-risk-percent").text(lowCholRisk+"%");
-			$("#chol-risk-percent").text(lowCholHeartAge + " years");
+			$("#chol-risk-percent").text(lowCholHeartAge);
 			$("#risk-chol").fadeIn("slow");
 			lowCholRisk = Math.round(1000 * lowCholRisk)/10
 			riskObject["#chol-risk-bubble"] = [Math.max(origSide,origSide*lowCholRisk*bubbleScale), lowCholRisk];
@@ -49,8 +49,8 @@ $(document).ready(function() {
 			$("#risk-chol").fadeOut(0);
 		} 
 
-		//slide out diets based on age
-		$("#age").val() >= 17 ? $("#diet").slideDown(500, "linear") : $("#diet").slideUp(500, "linear");
+		//slide out diets based on bp
+		$("#blood").val() > 135 ? $("#diet").slideDown(500, "linear") : $("#diet").slideUp(500, "linear");
 
 		//slide out smoking products and recommendations based on risk
 		if($("#smoker").val() == "1") {
@@ -58,7 +58,7 @@ $(document).ready(function() {
 			var notSmokeHeartAge = framingham.calcHeartAge(notSmokeRisk, modelType);
 			$(".smoke-product").slideDown(500, "linear");
 			//$("#smoke-risk-percent").text(notSmokeRisk+"%");
-			$("#smoke-risk-percent").text(notSmokeHeartAge + " years");
+			$("#smoke-risk-percent").text(notSmokeHeartAge);
 			$("#risk-smoke").fadeIn("slow");
 			notSmokeRisk = Math.round(1000 * notSmokeRisk)/10
 			riskObject["#smoke-risk-bubble"] = [Math.max(origSide,origSide*notSmokeRisk*bubbleScale), notSmokeRisk];
@@ -78,7 +78,7 @@ $(document).ready(function() {
 			var lowBpRisk = framingham.calcRisk(modelType,["blood"]);
 			var lowBpHeartAge = framingham.calcHeartAge(lowBpRisk, modelType);
 			//$("#bp-risk-percent").text(lowBpRisk+"%");
-			$("#bp-risk-percent").text(lowBpHeartAge + " years");
+			$("#bp-risk-percent").text(lowBpHeartAge);
 			$("#risk-blood").fadeIn("slow");
 			lowBpRisk = Math.round(1000 * lowBpRisk)/10
 			riskObject["#bp-risk-bubble"] = [Math.max(origSide,origSide*lowBpRisk*bubbleScale), lowBpRisk];
@@ -93,7 +93,7 @@ $(document).ready(function() {
 			var allRisk = framingham.calcRisk(modelType,["smoker","tc","blood"]);
 			var allHeartAge = framingham.calcHeartAge(allRisk, modelType);
 			//$("#all-risk-percent").text(allRisk+"%");
-			$("#all-risk-percent").text(allHeartAge + " years");
+			$("#all-risk-percent").text(allHeartAge);
 			$("#risk-all").fadeIn("slow");
 			allRisk = Math.round(1000 * allRisk)/10
 			riskObject["#all-risk-bubble"] = [Math.max(origSide,origSide*allRisk*bubbleScale), allRisk];
@@ -256,6 +256,196 @@ var framingham = {
 	}	
 
 };
+
+
+//force default to full cart (manual)
+var servingData = [{"id":"grains","group":"GRAINS","servings":[4,4],"maxservings":8,"text":"GOAL: 6-8"},
+                {"id":"vegetables","group":"VEGETABLES","servings":[4,1],"maxservings":5,"text":"GOAL: 4-5"},
+                {"id":"fruits","group":"FRUITS","servings":[4,1],"maxservings":5,"text":"GOAL: 4-5"},
+                {"id":"dairy","group":"DAIRY","servings":[1,2],"maxservings":3,"text":"GOAL: 2-3"},
+                {"id":"meat","group":"MEAT","servings":[1,5],"maxservings":6,"text":"GOAL: <6"},
+                {"id":"nutslegumes","group":"NUTS/LEGUMES","servings":[1,4],"maxservings":5,"text":"GOAL: 4-5/WEEK"},
+                {"id":"fatsoils","group":"FATS/OILS","servings":[0,3],"maxservings":3,"text":"GOAL: 2-3/WEEK"},
+                {"id":"sweets","group":"SWEETS","servings":[1,4],"maxservings":5,"text":"GOAL: <5/WEEK"},
+                {"id":"sodium","group":"SODIUM","servings":[415,1885],"maxservings":2300,"text":"GOAL: <2300 mg"}
+               ];
+
+//product json
+var firstTime = 1; //hack - later perhaps start out with all items selected?
+var productData = {
+                    "steamfresh": {
+                        "active": 0,
+                        "info": {"grains":0,"vegetables":2,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "freshexpress": {
+                        "active": 0,
+                        "info": {"grains":0,"vegetables":2,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "barilla": {
+                        "active": 0,
+                        "info": {"grains":1,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "cheerios": {
+                        "active": 0,
+                        "info": {"grains":1,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":150}
+                    },
+                   "saralee": {
+                        "active": 0,
+                        "info": {"grains":2,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "sunmaid": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":2,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "bananas": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":1,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":0}
+                    },
+                   "craisins": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":1,"dairy":0,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":1,"sodium":0}
+                    },
+                   "planters": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":0,"dairy":0,"meat":0,"nutslegumes":1,"fatsoils":0,"sweets":0,"sodium":100}
+                    },
+                   "chobani": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":0,"dairy":1,"meat":0,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":65}
+                    },
+                   "eggs": {
+                        "active":0,
+                        "info": {"grains":0,"vegetables":0,"fruits":0,"dairy":0,"meat":1,"nutslegumes":0,"fatsoils":0,"sweets":0,"sodium":100}
+                    }
+                 };
+
+//prepare donuts
+var width = 100,
+    height = 120,
+    radius = Math.min(width, height) / 2;
+
+var arc = d3.svg.arc()
+    .innerRadius(radius - 5)
+    .outerRadius(radius - 20);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d; });
+
+var svg = d3.select("#diet-charts").selectAll(".pie")
+      .data(servingData)
+    .enter().append("svg")
+      .attr("class", "pie")
+      .attr("id",function(d) {return d.group.toLowerCase().replace("/","")})
+      .attr("width", width)
+      .attr("height", function(d) {
+        return d.id == "sodium" ? height*1.22 : height;
+      })
+    .append("g")
+      .attr("transform", function(d) {
+        return d.id == "sodium" ? "translate(" + width / 2 + "," + 1.25*(height / 2) + ")" : "translate(" + width / 2 + "," + height / 2 + ")";
+      });
+
+//FOOD GROUP LABEL
+var foodGroupLabel = svg.append("svg:text")
+      .attr("class", "diet-label")
+      .attr("dy", -50)
+      .attr("text-anchor", "middle") 
+      .text(function(d) {return d.group;});
+
+//RECOMMENDED SERVING
+var reccServing = svg.append("svg:text")
+     .attr("class", "serving-recc-label")
+     .attr("dy", 58)
+     .attr("text-anchor", "middle") 
+     .text(function(d) {return d.text});
+
+//GRAPH ARCS
+var path = svg.selectAll(".arc")
+      .data(function(d) { 
+        return pie(d.servings); 
+    })
+    .enter().append("path")
+      .attr("class","arc")
+      .attr("fill", function(d, i) { 
+        mygroup = this.parentElement.getElementsByClassName('diet-label')[0].textContent;
+        if (mygroup == "MEAT" || mygroup == "NUTS/LEGUMES") {
+            return i == 0 ? "gold" : "lightgoldenrodyellow";
+        } else if (mygroup == "FATS/OILS" || mygroup == "SWEETS" || mygroup == "SODIUM") {
+            return i == 0 ? "red" : "pink";
+        } else {
+            return i == 0 ? "green" : "lightgreen";
+        }
+
+        })
+      .attr("d", arc)
+      .each(function(d) { this._current = d; });
+
+//CURRENT SERVING NUMBER
+var servingCenter = svg.append("svg:text")
+      .attr("class","serving-label")
+      .attr("style", function(d) {
+        return d.id == "sodium" ? "font-size:20px" : "font-size:50px";
+      })
+      .attr("dy", function(d) {
+            return d.id == "sodium" ? 10 : 19;
+        })
+      .attr("text-anchor", "middle")
+      .text(function(d,i) {return d.servings[0]});
+
+// ANIMATION //
+$('.product-box').on('click', function(){
+    //flip color
+    !productData[this.id]["active"] ? $(this).css("background-color","rgba(255, 255, 0, 0.24)") : $(this).css("background-color","rgba(0, 0, 0, 0.03)");
+
+    //reset all arcs and servings to zero if first time
+    if(firstTime) {
+        path = path.data(
+            function(d) {
+                d.servings[0] = 0;
+                d.servings[1] = d.maxservings;
+                return pie(d.servings);
+            });
+        servingCenter.text('0');
+        path.transition().duration(750).attrTween("d", arcTween);
+        firstTime = 0; //shutoff
+    }
+
+    //flip active state
+    productData[this.id]["active"] = 1 - productData[this.id]["active"];
+    prodID = this.id;
+
+    //modify servings and serving arc based on state of each item in json array
+    var tInfo = productData[prodID]["info"];
+    for (var infoKey in tInfo) {
+        path = path.data(function(d){
+            if(d.id == infoKey) {
+                if(productData[prodID]["active"]) {
+                    d.servings[0] += tInfo[infoKey];
+                    d.servings[1] -= tInfo[infoKey];
+                } else {
+                    d.servings[0] -= tInfo[infoKey];
+                    d.servings[1] += tInfo[infoKey];
+                }
+                $("#" + infoKey + " .serving-label").html(d.servings[0]);
+                return pie(d.servings);
+            } else {
+                return pie(d.servings);
+            }
+        });   
+    }
+    path.transition().duration(750).attrTween("d", arcTween);
+});
+
+//interpolation function to find new arc angle
+function arcTween(a) {
+  var i = d3.interpolate(this._current, a);
+  this._current = i(0);
+  return function(t) {
+    return arc(i(t));
+  };
+}
+
 
 /*
  * jQuery Simple Slider: Unobtrusive Numerical Slider
